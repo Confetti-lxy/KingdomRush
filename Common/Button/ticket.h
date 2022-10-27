@@ -12,11 +12,17 @@ private:
     activationImg;
 
 public:
-    ticket(QString routineImg, QString activationImg);
+    ticket(QString routineImg, QString activationImg = "");
 
     void zoomUp();
 
     void zoomDown();
+
+    void press(QMouseEvent *event);
+
+    void release(QMouseEvent *event);
+
+    signals:
 };
 
 #endif // TICKET_H

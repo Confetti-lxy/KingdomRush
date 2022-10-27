@@ -13,17 +13,17 @@ class road {
 private:
     QVector <QVector<int>> location = QVector < QVector < int >> (200, QVector<int>(2, 0));
     road_type type = ground_road;
-
+    Map *my_map;
 
 public:
-
-    Map *my_map;
 
     road() {};
 
     void set_type(road_type type);
 
     void set_location(QVector <QVector<int>> loc);
+
+    void set_map(Map *my_map);
 
     road_type get_type() const;
 

@@ -12,7 +12,7 @@ private:
     QWidget *page;
     bool isClicked = false, state = true;
     int rng;
-    vector<architecture *> buttons;
+    vector<architecture *> architectures;
 
 public:
 

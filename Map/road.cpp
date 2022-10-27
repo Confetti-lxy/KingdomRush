@@ -14,10 +14,9 @@ direction_type road::direction(int loc) const {
 }
 
 int road::transToLoc(int step, int &x, int &y) const {
-    int width = my_map->get_width();
+    int width = my_map->get_width(), temp = 0;
     int x_loc = location[0][0] * width, y_loc = location[0][1] * width;
     direction_type ans = d_left;
-    int temp = 0;
     for (int i = 0; i < location.size(); i++) {
         ans = direction(i);
         if (step > width) {
@@ -48,6 +47,10 @@ void road::set_type(road_type type) {
 
 void road::set_location(QVector <QVector<int>> loc) {
     this->location = loc;
+}
+
+void road::set_map(Map *my_map) {
+    this->my_map = my_map;
 }
 
 

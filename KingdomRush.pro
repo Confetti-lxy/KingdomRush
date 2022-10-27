@@ -11,9 +11,16 @@ CONFIG += c++17
 SOURCES += \
     Common/Button/architecture.cpp \
     Common/Button/build.cpp \
+    Common/Button/deploy.cpp \
     Common/Button/ticket.cpp \
     Common/common.cpp \
+    Enemy/EnemyState/enemystate.cpp \
+    Enemy/FlyEnemy/flyenemy.cpp \
+    Enemy/GroundEnemy/barbarian.cpp \
+    Enemy/GroundEnemy/groundenemy.cpp \
     Enemy/enemy.cpp \
+    Friend/Defender/defender.cpp \
+    Friend/Tower/tower.cpp \
     Map/map.cpp \
     Map/road.cpp \
     main.cpp \
@@ -22,9 +29,16 @@ SOURCES += \
 HEADERS += \
     Common/Button/architecture.h \
     Common/Button/build.h \
+    Common/Button/deploy.h \
     Common/Button/ticket.h \
     Common/common.h \
+    Enemy/EnemyState/enemystate.h \
+    Enemy/FlyEnemy/flyenemy.h \
+    Enemy/GroundEnemy/barbarian.h \
+    Enemy/GroundEnemy/groundenemy.h \
     Enemy/enemy.h \
+    Friend/Defender/defender.h \
+    Friend/Tower/tower.h \
     Map/map.h \
     Map/road.h \
     widget.h
@@ -41,3 +55,7 @@ CONFIG += embed_translations
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    image/image.qrc \
+    mapfile/file.qrc

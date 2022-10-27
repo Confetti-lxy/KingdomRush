@@ -1,8 +1,57 @@
 #include "map.h"
 
+
+void Map::load() {
+    if (!StoneImg.load(":/image/stone_cell.png")) {
+        qDebug() << "picture load fail";
+        return;
+    }
+    if (!CloseImg.load(":/image/close_cell.png")) {
+        qDebug() << "picture load fail";
+        return;
+    }
+    if (!RemoteImg.load(":/image/remote_cell.png")) {
+        qDebug() << "picture load fail";
+        return;
+    }
+    if (!StartImg.load(":/image/start.png")) {
+        qDebug() << "picture load fail";
+        return;
+    }
+    if (!EndImg.load(":/image/end.png")) {
+        qDebug() << "picture load fail";
+        return;
+    }
+}
+
+void Map::updateParcels() {
+    int x_loc = 0, y_loc = 0;
+    for (int i = 0; i < allRoads.size(); i++) {
+        for (int j = 0; j < allRoads[i].get_len(); j++) {
+            x_loc = allRoads[i].get_loc(i, 0);
+            y_loc = allRoads[i].get_loc(i, 1);
+            if (allRoads[i].get_type() == stone_road) {
+                grid[x_loc][y_loc] = stone_cell;
+            } else {
+                if (j == 0) {
+                    grid[x_loc][y_loc] = start_cell;
+                } else if (j == allRoads[i].get_len() - 1) {
+                    grid[x_loc][y_loc] = end_cell;
+                } else {
+                    grid[x_loc][y_loc] = close_cell;
+                }
+            }
+        }
+    }
+}
+
+
 Map::Map(QString path) {
+    // 图片加载
+    load();
+    // 文件读取
     QFile FILE(path);
-    int count = 0, type, num = 0;
+    int count = 0, type, num = 0, road_count = 0;
     int x_loc = 0, y_loc = 0;
     if (!FILE.open(QIODevice::ReadOnly)) {
         qDebug() << FILE.errorString();
@@ -24,49 +73,12 @@ Map::Map(QString path) {
             route.push_back({x_loc, y_loc});
         }
         route.pop_back();//去除尾部的"/0"
-        allRoads[count].my_map = this;
+        allRoads[count].set_location(route);
+        allRoads[count].set_map(this);
         count++;
     }
-    for (int i = 0; i < road_count; i++) {
-        for (int j = 0; j < allRoads[i].get_len(); j++) {
-            x_loc = allRoads[i].get_loc(i, 0);
-            y_loc = allRoads[i].get_loc(i, 1);
-            if (allRoads[i].get_type() == stone_road) {
-                grid[x_loc][y_loc] = stone_cell;
-            } else {
-                if (j == 0) {
-                    grid[x_loc][y_loc] = start_cell;
-                } else if (j == allRoads[i].get_len() - 1) {
-                    grid[x_loc][y_loc] = end_cell;
-                } else {
-                    grid[x_loc][y_loc] = close_cell;
-                }
-            }
-        }
-    }
-
-
-    // 图片加载
-    if (!StoneImg.load("C:/Users/hp/Desktop/KingdomRush/image/stone_cell.png")) {
-        qDebug() << "picture load fail";
-        return;
-    }
-    if (!CloseImg.load("C:/Users/hp/Desktop/KingdomRush/image/close_cell.png")) {
-        qDebug() << "picture load fail";
-        return;
-    }
-    if (!RemoteImg.load("C:/Users/hp/Desktop/KingdomRush/image/remote_cell.png")) {
-        qDebug() << "picture load fail";
-        return;
-    }
-    if (!StartImg.load("C:/Users/hp/Desktop/KingdomRush/image/start.png")) {
-        qDebug() << "picture load fail";
-        return;
-    }
-    if (!EndImg.load("C:/Users/hp/Desktop/KingdomRush/image/end.png")) {
-        qDebug() << "picture load fail";
-        return;
-    }
+    // 地块更新
+    updateParcels();
 }
 
 
@@ -115,7 +127,7 @@ cell_type Map::get_grid(int x, int y) const {
 }
 
 int Map::get_road() const {
-    return road_count;
+    return allRoads.size();
 }
 
 int Map::get_remote() const {

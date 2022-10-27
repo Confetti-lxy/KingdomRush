@@ -9,15 +9,14 @@ Widget::Widget(QWidget *parent)
     QLabel *status = new QLabel;
     QPixmap level;
     this->setWindowTitle("Kingdom Rush！");
-    this->setWindowIcon(QPixmap("C:/Users/hp/Desktop/KingdomRush/image/Icon.png"));
-    Map my_map("C:/Users/hp/Desktop/KingdomRush/MapFile/mapfile.txt");
+    this->setWindowIcon(QPixmap(":/image/Icon.png"));
+    Map my_map(":/file/mapfile.txt");
     this->setFixedSize(my_map.get_len(), my_map.get_height());
-    ticket *start = new ticket("C:/Users/hp/Desktop/KingdomRush/image/start1.png",
-                               "C:/Users/hp/Desktop/KingdomRush/image/start2.png");
+    ticket *start = new ticket(":/image/start1.png",
+                               ":/image/start2.png");
     start->move(370, 315);
     start->setParent(this);
-    bool ret = level.load("C:/Users/hp/Desktop/KingdomRush/image/levelchoose.png");
-    if (!ret) {
+    if (!level.load(":/image/levelchoose.png")) {
         qDebug() << "picture load fail";
         return;
     }
@@ -28,7 +27,7 @@ Widget::Widget(QWidget *parent)
     connect(start, &QPushButton::clicked, [=]() {
         start->zoomDown();
         start->zoomUp();
-        QTimer::singleShot(200, [=]() {
+        QTimer::singleShot(300, [=]() {
             status->show();
             state = true;
         });
@@ -41,8 +40,8 @@ Widget::~Widget() {
 
 void Widget::paintEvent(QPaintEvent *) {
     QPainter painter(this);
-    painter.drawPixmap(0, 0, QPixmap("C:/Users/hp/Desktop/KingdomRush/image/map1.png"));
-    painter.drawPixmap(0, 0, QPixmap("C:/Users/hp/Desktop/KingdomRush/image/menu.jpg"));
+    painter.drawPixmap(0, 0, QPixmap(":/image/map1.png"));
+    painter.drawPixmap(0, 0, QPixmap(":/image/menu.jpg"));
 }
 
 
