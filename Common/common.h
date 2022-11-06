@@ -22,6 +22,12 @@ setStyleSheet("QPushButton{border:Opx;}");\
 setIcon(pix);\
 setIconSize(QSize(pix.width(),pix.height()));
 
+#define setBase(pix)\
+setFixedSize(pix.width(),pix.height());\
+setStyleSheet("QPushButton{border:Opx;}");\
+setPixmap(pix);\
+setBaseSize(QSize(pix.width(),pix.height()));
+
 enum direction_type {
     d_right,
     d_left,
@@ -44,11 +50,17 @@ enum cell_type {
 };//地块种类
 
 enum EnemyType {
-    ground_enemy_01,
+    Barbarian,
     ground_enemy_02,
     fly_enemy_01,
     fly_enemy_02,
 };//敌方种类
+
+enum DefenderType {
+    Soldier,
+    Defender_02,
+    Defender_03,
+};
 
 enum EnemyDirection {
     e_left,
@@ -68,5 +80,14 @@ struct groundEnemyImage {
     QPixmap enemyattackright1_Img;
     QPixmap enemyattackright2_Img;
 };// 地面敌人的图片
+
+struct defenderImage {
+    QPixmap soldierImg;
+    QPixmap soldierBtnImg;
+    QPixmap soldierattackleft1_Img;
+    QPixmap soldierattackright1_Img;
+    QPixmap soldierattackleft2_Img;
+    QPixmap soldierattackright2_Img;
+};
 
 #endif // COMMON_H

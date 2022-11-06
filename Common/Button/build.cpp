@@ -20,13 +20,9 @@ build::build(QWidget *page) {
     Circle->setPixmap(CircleImg);
     Circle->setBaseSize(QSize(CircleImg.width(), CircleImg.height()));
     Circle->setAttribute(Qt::WA_TransparentForMouseEvents);
-    setFixedSize(RemoteCellImg.width(), RemoteCellImg.height());
-    setStyleSheet("QPushButton{border:Opx;}");
-    setIcon(RemoteCellImg);
-    setIconSize(QSize(RemoteCellImg.width(), RemoteCellImg.height()));
+    set(RemoteCellImg);
     setAttribute(Qt::WA_TransparentForMouseEvents);
     show();
-
     auto *tower1 = new architecture(":/image/tower_1_btn.png"),
             *tower2 = new architecture(":/image/tower_2_btn.png"),
             *tower3 = new architecture(":/image/tower_3_btn.png");
@@ -59,8 +55,6 @@ void build::PressEvent(int x, int y) {
                 architectures[0]->move(Circle->x() + 47, Circle->y() + 2);
                 architectures[1]->move(Circle->x() + 85, Circle->y() + 55);
                 architectures[2]->move(Circle->x() + 9, Circle->y() + 55);
-
-
                 for (auto architecture: architectures) {
                     architecture->show();
                     architecture->raise();

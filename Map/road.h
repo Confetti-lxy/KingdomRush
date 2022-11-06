@@ -2,7 +2,6 @@
 #define ROAD_H
 
 #include "../Common/common.h"
-
 #include "../Map/map.h"
 
 

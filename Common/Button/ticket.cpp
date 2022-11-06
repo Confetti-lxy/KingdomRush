@@ -9,10 +9,7 @@ ticket::ticket(QString routineImg, QString activationImg) {
         qDebug() << "picture load fail";
         return;
     }
-    setFixedSize(normalImg.width(), normalImg.height());
-    setStyleSheet("QPushButton{border:Opx;}");
-    setIcon(normalImg);
-    setIconSize(QSize(normalImg.width(), normalImg.height()));
+    set(normalImg);
     show();
 }
 
@@ -43,10 +40,7 @@ void ticket::press(QMouseEvent *event) {
             qDebug() << "picture load fail";
             return;
         }
-        setFixedSize(pix.width(), pix.height());
-        setStyleSheet("QPushButton{border:Opx;}");
-        setIcon(pix);
-        setIconSize(QSize(pix.width(), pix.height()));
+        set(pix);
     }
     return mousePressEvent(event);
 }
@@ -59,10 +53,7 @@ void ticket::release(QMouseEvent *event) {
             qDebug() << "picture load fail";
             return;
         }
-        setFixedSize(pix.width(), pix.height());
-        setStyleSheet("QPushButton{border:Opx;}");
-        setIcon(pix);
-        setIconSize(QSize(pix.width(), pix.height()));
+        set(pix);
     }
     return mouseReleaseEvent(event);
 }

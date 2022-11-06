@@ -8,8 +8,5 @@ architecture::architecture(const QString &architecturePath) {
         qDebug() << "picture load failed";
         return;
     }
-    setFixedSize(pix.width(), pix.height());
-    setStyleSheet("QPushButton{border:Opx;}");
-    setIcon(pix);
-    setIconSize(QSize(pix.width(), pix.height()));
+    set(pix);
 }

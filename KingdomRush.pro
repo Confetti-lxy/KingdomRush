@@ -20,6 +20,7 @@ SOURCES += \
     Enemy/GroundEnemy/groundenemy.cpp \
     Enemy/enemy.cpp \
     Friend/Defender/defender.cpp \
+    Friend/Defender/soldier.cpp \
     Friend/Tower/tower.cpp \
     Map/map.cpp \
     Map/road.cpp \
@@ -38,6 +39,7 @@ HEADERS += \
     Enemy/GroundEnemy/groundenemy.h \
     Enemy/enemy.h \
     Friend/Defender/defender.h \
+    Friend/Defender/soldier.h \
     Friend/Tower/tower.h \
     Map/map.h \
     Map/road.h \

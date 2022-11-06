@@ -37,10 +37,12 @@ void barbarian::load() {
 
 barbarian::barbarian() {
     barbarian::load();
-    setFixedSize(enemyImage.enemyleft1_Img.width(), enemyImage.enemyleft1_Img.height());
-    setStyleSheet("QPushButton{border:Opx;}");
-    setPixmap(enemyImage.enemyleft1_Img);
-    setBaseSize(QSize(enemyImage.enemyleft1_Img.width(), enemyImage.enemyleft1_Img.height()));
+    setBase(enemyImage.enemyleft1_Img);
+    type = Barbarian;
+    set_atk(400), set_rng(1);
+    set_allLife(4000), set_existLife(4000);
+    set_speed(4), set_interval(2000), set_direction(e_left);
+    set_defender(nullptr);
 }
 
 

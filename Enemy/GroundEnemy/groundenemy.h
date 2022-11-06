@@ -13,11 +13,13 @@ public:
 
     groundEnemy();
 
-    void enemyMove(int road_loc, int step);
+    void enemyMove(int road_loc, int step);// 移动
 
-    virtual void attackAnimation() = 0;
+    void Lock_defender();//锁定敌人
 
-    virtual void moveAnimation() = 0;
+    virtual void attackAnimation() = 0; // 攻击动画
+
+    virtual void moveAnimation() = 0;// 移动动画
 };
 
 #endif // GROUNDENEMY_H
