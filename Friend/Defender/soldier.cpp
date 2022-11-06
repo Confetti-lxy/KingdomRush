@@ -36,24 +36,24 @@ soldier::soldier() {
 
 void soldier::attackAnimation(enemy *blockedEnemy) {
     if (x() < blockedEnemy->x()) {
-        if (!get_attack()) {
+        if (!get_atkImg()) {
             setPixmap(defenderImage.soldierattackright1_Img);
             raise();
-            set_attack(true);
+            set_atkImg(true);
         } else {
             setPixmap(defenderImage.soldierattackright2_Img);
             raise();
-            set_attack(false);
+            set_atkImg(false);
         }
     } else {
-        if (!get_attack()) {
+        if (!get_atkImg()) {
             setPixmap(defenderImage.soldierattackleft1_Img);
             raise();
-            set_attack(true);
+            set_atkImg(true);
         } else {
             setPixmap(defenderImage.soldierattackleft2_Img);
             raise();
-            set_attack(false);
+            set_atkImg(false);
         }
     }
 }

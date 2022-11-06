@@ -47,23 +47,23 @@ barbarian::barbarian() {
 
 
 void barbarian::attackAnimation() {
-    if (!get_attack()) {
-        setPixmap(enemyImage.enemyattackleft1_Img);
-        set_attack(true);
+    if (x() > get_defender()->x()) {
+        if (!get_atkImg()) {
+            setPixmap(enemyImage.enemyattackleft1_Img);
+            set_atkImg(true);
+        } else {
+            setPixmap(enemyImage.enemyattackleft2_Img);
+            set_atkImg(false);
+        }
     } else {
-        setPixmap(enemyImage.enemyattackleft2_Img);
-        set_attack(false);
+        if (!get_atkImg()) {
+            setPixmap(enemyImage.enemyattackright1_Img);
+            set_atkImg(true);
+        } else {
+            setPixmap(enemyImage.enemyattackright2_Img);
+            set_atkImg(false);
+        }
     }
-
-
-//    if(!get_attack()) {
-//        setPixmap(enemyImage.enemyattackright1_Img);
-//        set_attack(true);
-//    }
-//    else {
-//        setPixmap(enemyImage.enemyattackright2_Img);
-//        set_attack(false);
-//    }
 }
 
 void barbarian::moveAnimation() {
