@@ -10,36 +10,39 @@ class defender;
 class enemy : public QLabel {
 private:
 
-    int atk, rng;   //攻击力和攻击范围
-    bool isAttack;  //是否在战斗状态
-    bool isAtkImg1; //是否在攻击动画的第一张图
+    int atk, rng;   // 攻击力和攻击范围
+    bool isAttack;  // 是否在战斗状态
+    bool isAtkImg1; // 是否在攻击动画的第一张图
 
-    int allLife, existLife;//全部生命和现存生命
-    bool isAlive;//是否存活
+    int allLife, existLife;// 全部生命和现存生命
+    bool isAlive;// 是否存活
 
-    int speed; //移动速度
-    int moveInterval;//移动间隔，和speed想对应
-    int roadIndex;//判断走的是哪条路径
-    EnemyDirection enemyDirection;//面朝方向
-    bool isImg1;//是否是步行的第一步
+    int speed; // 移动速度
+    int moveInterval;// 移动间隔，和speed想对应
+    int roadIndex;// 判断走的是哪条路径
+    EnemyDirection enemyDirection;// 面朝方向
+    bool isImg1;// 是否是步行的第一步
 
-    defender *blockedDefender;//
-    bool isBlocked;//是否被阻挡
+    defender *blockedDefender;// 阻挡的敌人
+    bool isBlocked;// 是否被阻挡
 
-    vector <enemyState> states;//敌人的buff状态
+    bool isArrive;// 是否到达重点
+
+    vector <enemyState> states;// 敌人的buff状态
 
 
 public:
     Map *my_map;
-    EnemyType type;//敌人种类
+    EnemyType Type;// 敌人种类
 
     // 构造函数
     enemy();
 
     // 功能函数
-    void beAttatked(int hurt);//受到攻击,切换成攻击状态
-    bool statusChecking(); //生命值检查
-
+    void beAttatked(int hurt);// 受到攻击,切换成攻击状态
+    bool statusChecking(); // 生命值检查
+    double distance_cal(int friend_x, int friend_y);// 计算与我方单位的距离
+    bool enterEnd();// 是否抵达终点
 
 
 
@@ -112,6 +115,10 @@ public:
     void set_blocked(bool blocked) { this->isBlocked = blocked; }
 
     bool get_blocked() { return isBlocked; }
+
+    bool get_arrive() { return this->isArrive; }
+
+    void set_arrive(bool arrive) { this->isArrive = arrive; }
 };
 
 #endif // ENEMY_H

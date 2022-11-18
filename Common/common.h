@@ -16,12 +16,14 @@ using namespace std;
 #include <QPainter>
 #include <QImage>
 
+// 图片设置1
 #define set(pix)\
 setFixedSize(pix.width(),pix.height());\
 setStyleSheet("QPushButton{border:Opx;}");\
 setIcon(pix);\
 setIconSize(QSize(pix.width(),pix.height()));
 
+// 图片设置2
 #define setBase(pix)\
 setFixedSize(pix.width(),pix.height());\
 setStyleSheet("QPushButton{border:Opx;}");\
@@ -33,7 +35,7 @@ enum direction_type {
     d_left,
     d_front,
     d_back
-};//行进方向
+};//敌人的行进方向
 
 enum road_type {
     ground_road,
@@ -47,27 +49,27 @@ enum cell_type {
     close_cell,
     start_cell,
     end_cell
-};//地块种类
+};// 地块种类
 
 enum EnemyType {
     Barbarian,
     ground_enemy_02,
     fly_enemy_01,
     fly_enemy_02,
-};//敌方种类
+};// 敌方种类
 
 enum DefenderType {
     Soldier,
     Defender_02,
     Defender_03,
-};
+};// 友方近战单位的种类
 
 enum EnemyDirection {
     e_left,
     e_right,
     e_front,
     e_back,
-};//敌方面朝方向
+};// 敌方面朝方向
 
 
 struct groundEnemyImage {
@@ -79,7 +81,7 @@ struct groundEnemyImage {
     QPixmap enemyattackleft2_Img;
     QPixmap enemyattackright1_Img;
     QPixmap enemyattackright2_Img;
-};// 地面敌人的图片
+};// 地面敌人的图片素材
 
 struct defenderImage {
     QPixmap soldierImg;
@@ -88,6 +90,6 @@ struct defenderImage {
     QPixmap soldierattackright1_Img;
     QPixmap soldierattackleft2_Img;
     QPixmap soldierattackright2_Img;
-};
+};// soldier单位的图片素材
 
 #endif // COMMON_H
