@@ -51,7 +51,7 @@ public:
     void beAttacked(int atk);// 受到攻击，失去生命值
     bool judge_attack(int x, int y);// 判断是否在攻击范围内，以此判断是否攻击
     double distance_cal(int enemy_x, int enemy_y);// 计算与敌人的距离
-    bool add_enemy(enemy *e);// 添加阻挡的敌人
+    virtual bool add_enemy(enemy *e);// 添加阻挡的敌人
 
 
     //鼠标动作，相关的部署函数

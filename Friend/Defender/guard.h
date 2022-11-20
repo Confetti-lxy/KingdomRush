@@ -1,18 +1,16 @@
-#ifndef SOLDIER_H
-#define SOLDIER_H
+#ifndef GUARD_H
+#define GUARD_H
 
 #include "defender.h"
 
-
-class soldier : public defender {
+class guard : public defender {
 private:
     bool load() override;
 
 public:
-    defenderImage defenderImg; // 战士的图片资源
+    QPixmap guardImg;
 
-
-    soldier();    // 构造函数
+    guard();// 构造函数
 
     // 功能函数
     void attackAnimation(enemy *blockedEnemy) override;// 攻击动画
@@ -22,7 +20,6 @@ public:
     // 鼠标动作，相关的部署函数
     void defenderDeploy(QMouseEvent *click) override;// 鼠标点击部署位置，下放单位
     bool location_check(QMouseEvent *click) override;// 位置检查
-
 };
 
-#endif // SOLDIER_H
+#endif // GUARD_H

@@ -13,22 +13,25 @@ using namespace std;
 #include <QPropertyAnimation>
 #include <QFile>
 #include <QTimer>
+#include <QTime>
+#include <QBrush>
 #include <QPainter>
 #include <QImage>
+#include <QIcon>
 
 // 图片设置1
 #define set(pix)\
-setFixedSize(pix.width(),pix.height());\
-setStyleSheet("QPushButton{border:Opx;}");\
-setIcon(pix);\
-setIconSize(QSize(pix.width(),pix.height()));
+    setFixedSize(pix.width(),pix.height());\
+    setStyleSheet("QPushButton{border:Opx;}");\
+    setIcon(pix);\
+    setIconSize(QSize(pix.width(),pix.height()));
 
 // 图片设置2
 #define setBase(pix)\
-setFixedSize(pix.width(),pix.height());\
-setStyleSheet("QPushButton{border:Opx;}");\
-setPixmap(pix);\
-setBaseSize(QSize(pix.width(),pix.height()));
+    setFixedSize(pix.width(),pix.height());\
+    setStyleSheet("QPushButton{border:Opx;}");\
+    setPixmap(pix);\
+    setBaseSize(QSize(pix.width(),pix.height()));
 
 enum direction_type {
     d_right,
@@ -53,15 +56,15 @@ enum cell_type {
 
 enum EnemyType {
     Barbarian,
-    ground_enemy_02,
+    Remoteenemy,
     fly_enemy_01,
     fly_enemy_02,
 };// 敌方种类
 
 enum DefenderType {
     Soldier,
-    Defender_02,
-    Defender_03,
+    Guard,
+    Dragon,
 };// 友方近战单位的种类
 
 enum EnemyDirection {
@@ -92,4 +95,46 @@ struct defenderImage {
     QPixmap soldierattackright2_Img;
 };// soldier单位的图片素材
 
+struct dragonImage {
+    QPixmap dragonImg;
+    QPixmap dragonBtnImg;
+    QPixmap dragonattackleft1_Img;
+    QPixmap dragonattackright1_Img;
+    QPixmap dragonattackleft2_Img;
+    QPixmap dragonattackright2_Img;
+    QPixmap dragonattackleft3_Img;
+    QPixmap dragonattackright3_Img;
+    QPixmap dragonattackleft4_Img;
+    QPixmap dragonattackright4_Img;
+};// dragon单位的图片素材
+
+struct levelLabel {
+    QLabel *moneyLabel;// 钱的计量槽
+    QLabel *moneyNum;// 钱的数量
+    QLabel *lifeLabel;// 生命的计量槽
+    QLabel *lifeNum;// 生命的数量
+    QLabel *victoryInterface;// 胜利界面
+    QLabel *failureInterface;// 失败界面
+    QLabel *oneSpeed;// 一倍速的标签
+    QLabel *doubleSpeed;// 两倍速的标签
+};// level里面的标签组件
+
+struct levelButton {
+    QPushButton *reopen;// 重新开始
+    QPushButton *back;// 返回到选地图的界面
+};// level里面的按钮组件
+
 #endif // COMMON_H
+
+
+
+
+
+
+
+
+
+
+
+
+

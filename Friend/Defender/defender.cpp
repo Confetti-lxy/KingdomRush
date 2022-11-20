@@ -54,7 +54,7 @@ bool defender::judge_attack(int x, int y) {
 
 bool defender::add_enemy(enemy *e) {
     if (e->statusChecking() && blockedEnemys.size() < block_num) {
-        if (e->Type == ground_enemy_02 || e->Type == Barbarian) {
+        if (e->Type == Remoteenemy || e->Type == Barbarian) {
             if (!e->get_blocked() && judge_attack(e->x(), e->y())) {
                 blockedEnemys.append(e);
                 e->set_blocked(true);

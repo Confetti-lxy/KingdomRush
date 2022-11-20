@@ -1,24 +1,24 @@
 #include "soldier.h"
 
 bool soldier::load() {
-    my_deploy = new deploy(":/Image/soldier1_btn.jpg");
-    if (!defenderImage.soldierImg.load(":/Image/soldier1.png")) {
+    my_deploy = new deploy(":/image/soldier1_btn.jpg");
+    if (!defenderImg.soldierImg.load(":/image/soldier1.png")) {
         qDebug() << "picture load fail";
         return false;
     }
-    if (!defenderImage.soldierattackleft1_Img.load(":/Image/soldier1attackleft1.png")) {
+    if (!defenderImg.soldierattackleft1_Img.load(":/image/soldier1attackleft1.png")) {
         qDebug() << "picture load fail";
         return false;
     }
-    if (!defenderImage.soldierattackleft2_Img.load(":/Image/soldier1attackleft2.png")) {
+    if (!defenderImg.soldierattackleft2_Img.load(":/image/soldier1attackleft2.png")) {
         qDebug() << "picture load fail";
         return false;
     }
-    if (!defenderImage.soldierattackright1_Img.load(":/Image/soldier1attackright1.png")) {
+    if (!defenderImg.soldierattackright1_Img.load(":/image/soldier1attackright1.png")) {
         qDebug() << "picture load fail";
         return false;
     }
-    if (!defenderImage.soldierattackright2_Img.load(":/Image/soldier1attackright2.png")) {
+    if (!defenderImg.soldierattackright2_Img.load(":/image/soldier1attackright2.png")) {
         qDebug() << "picture load fail";
         return false;
     }
@@ -32,7 +32,7 @@ soldier::soldier() {
     }
 
     // 图片设置
-    setBase(defenderImage.soldierImg);
+    setBase(defenderImg.soldierImg);
 
 
     // soldier单位的数值设计
@@ -45,21 +45,21 @@ soldier::soldier() {
 void soldier::attackAnimation(enemy *blockedEnemy) {
     if (x() < blockedEnemy->x()) {
         if (!get_atkImg()) {
-            setPixmap(defenderImage.soldierattackright1_Img);
+            setPixmap(defenderImg.soldierattackright1_Img);
             raise();
             set_atkImg(true);
         } else {
-            setPixmap(defenderImage.soldierattackright2_Img);
+            setPixmap(defenderImg.soldierattackright2_Img);
             raise();
             set_atkImg(false);
         }
     } else {
         if (!get_atkImg()) {
-            setPixmap(defenderImage.soldierattackleft1_Img);
+            setPixmap(defenderImg.soldierattackleft1_Img);
             raise();
             set_atkImg(true);
         } else {
-            setPixmap(defenderImage.soldierattackleft2_Img);
+            setPixmap(defenderImg.soldierattackleft2_Img);
             raise();
             set_atkImg(false);
         }
@@ -88,7 +88,7 @@ void soldier::attack() {
         }
             // 否则则变为初始的未攻击的状态
         else {
-            setPixmap(defenderImage.soldierImg);
+            setPixmap(defenderImg.soldierImg);
             int width = my_map->get_width();
             move(relative_x * width, relative_y * width);
         }

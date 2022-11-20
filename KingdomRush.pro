@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Common/Bullet/bullet.cpp \
     Common/Button/architecture.cpp \
     Common/Button/build.cpp \
     Common/Button/deploy.cpp \
@@ -18,29 +19,40 @@ SOURCES += \
     Enemy/FlyEnemy/flyenemy.cpp \
     Enemy/GroundEnemy/barbarian.cpp \
     Enemy/GroundEnemy/groundenemy.cpp \
+    Enemy/GroundEnemy/remoteenemy.cpp \
     Enemy/enemy.cpp \
     Friend/Defender/defender.cpp \
+    Friend/Defender/dragon.cpp \
+    Friend/Defender/guard.cpp \
     Friend/Defender/soldier.cpp \
     Friend/Tower/tower.cpp \
+    Level/level.cpp \
     Map/map.cpp \
     Map/road.cpp \
     main.cpp \
     widget.cpp
 
 HEADERS += \
+    Common/Bullet/bullet.h \
     Common/Button/architecture.h \
     Common/Button/build.h \
     Common/Button/deploy.h \
     Common/Button/ticket.h \
     Common/common.h \
+    Enemy/EnemyIntegration.h \
     Enemy/EnemyState/enemystate.h \
     Enemy/FlyEnemy/flyenemy.h \
     Enemy/GroundEnemy/barbarian.h \
     Enemy/GroundEnemy/groundenemy.h \
+    Enemy/GroundEnemy/remoteenemy.h \
     Enemy/enemy.h \
     Friend/Defender/defender.h \
+    Friend/Defender/dragon.h \
+    Friend/Defender/guard.h \
     Friend/Defender/soldier.h \
+    Friend/FriendIntegration.h \
     Friend/Tower/tower.h \
+    Level/level.h \
     Map/map.h \
     Map/road.h \
     widget.h
