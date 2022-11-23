@@ -9,7 +9,7 @@ ticket::ticket(QString routineImg, QString activationImg) {
         qDebug() << "picture load fail";
         return;
     }
-    set(normalImg);
+    SetIcon(normalImg);
     show();
 }
 
@@ -40,9 +40,9 @@ void ticket::press(QMouseEvent *event) {
             qDebug() << "picture load fail";
             return;
         }
-        set(pix);
+        SetIcon(pix);
     }
-    return mousePressEvent(event);
+    return press(event);
 }
 
 
@@ -53,7 +53,7 @@ void ticket::release(QMouseEvent *event) {
             qDebug() << "picture load fail";
             return;
         }
-        set(pix);
+        SetIcon(pix);
     }
     return mouseReleaseEvent(event);
 }

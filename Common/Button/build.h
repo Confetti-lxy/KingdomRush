@@ -12,17 +12,21 @@ private:
     QWidget *page;
     bool isClicked = false, state = true;
     int rng;
-    vector<architecture *> architectures;
+
 
 public:
 
-    explicit build(QWidget *page);
+    QVector<architecture *> architectures = QVector<architecture *>(3);
 
-    void PressEvent(int x, int y);
+    explicit build(QWidget *page);// 构造函数
 
-    void setState(bool s);
+    void PressEvent(int x, int y);// 鼠标点击动作
 
-    void setRng(int r);
+
+    // get和set函数
+    void setState(bool s) { this->state = s; }
+
+    void setRng(int r) { this->rng = r; }
 };
 
 #endif // BUILD_H

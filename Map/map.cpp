@@ -29,8 +29,8 @@ void Map::updateParcels() {
     int x_loc = 0, y_loc = 0;// 每个格子的横纵坐标
     for (int i = 0; i < allRoads.size(); i++) {
         for (int j = 0; j < allRoads[i].get_len(); j++) {
-            x_loc = allRoads[i].get_loc(i, 0);
-            y_loc = allRoads[i].get_loc(i, 1);
+            x_loc = allRoads[i].get_loc(j, 0);
+            y_loc = allRoads[i].get_loc(j, 1);
             if (allRoads[i].get_type() == stone_road) {
                 grid[x_loc][y_loc] = stone_cell;// 石头地块
             } else {
@@ -52,8 +52,6 @@ Map::Map(QString path) {
     if (!load()) {
         return;
     }
-
-
     // 文件读取,并根据读取的文件参数来构造地图结构，后续创建新地图时只需要填写相关的地图参数即可
     QFile FILE(path);
     // count为现在读到第count条路径
@@ -65,38 +63,27 @@ Map::Map(QString path) {
         exit(-1);
     }
     QString ifs = FILE.readLine();
-
     QTextStream read_01(&ifs);// 对路线数量的读取
     read_01 >> road_count;
     allRoads.resize(road_count);
-
     // 对路径的具体路线进行读取
     while (!FILE.atEnd()) {
         ifs = FILE.readLine();
-
         QVector <QVector<int>> route;// 路径坐标
-
-
         QTextStream read_02(&ifs);// 对路径的长度和种类的读取
         read_02 >> type >> num;
         allRoads[count].set_type(road_type(type));
-
-
         ifs = FILE.readLine();
         QTextStream read_03(&ifs);// 对一条路径每个坐标的读取
         while (!read_03.atEnd()) {
             read_03 >> x_loc >> y_loc;
             route.push_back({x_loc, y_loc});
         }
-
-
         route.pop_back();//去除尾部的"/0"
         allRoads[count].set_location(route);
         allRoads[count].set_map(this);
         count++;
     }
-
-
     // 根据路径坐标对地块进行更新
     updateParcels();
 }
@@ -114,7 +101,7 @@ void Map::update(QWidget *page) {
             } else if (grid[i][j] == remote_cell) {
                 // 远程部署单位的地块设置
                 build *new_remote = new build(page);
-                new_remote->move(i * width, j * width);
+                new_remote->move(i * width, j * width - 30);
                 new_remote->setParent(page);
                 allRemotes.push_back(new_remote);
             } else if (grid[i][j] == start_cell) {

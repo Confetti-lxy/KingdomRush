@@ -1,7 +1,7 @@
 #include "dragon.h"
 
 bool dragon::load() {
-    my_deploy = new deploy(":/image/soldier3_btn.jpg");
+    my_deploy = new deploy(":/image/soldier3_btn.png");
     if (!dragonImg.dragonImg.load(":/image/soldier3.png")) {
         qDebug() << "picture load fail";
         return false;
@@ -48,7 +48,7 @@ dragon::dragon() {
     }
 
     // 图片设置
-    setBase(dragonImg.dragonImg);
+    SetBase(dragonImg.dragonImg);
 
     // soldier单位的数值设计
     Type = Dragon;

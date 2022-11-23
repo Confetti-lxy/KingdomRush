@@ -32,7 +32,7 @@ soldier::soldier() {
     }
 
     // 图片设置
-    setBase(defenderImg.soldierImg);
+    SetBase(defenderImg.soldierImg);
 
 
     // soldier单位的数值设计

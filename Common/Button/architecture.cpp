@@ -8,5 +8,5 @@ architecture::architecture(const QString &architecturePath) {
         qDebug() << "picture load failed";
         return;
     }
-    set(pix);
+    SetIcon(pix);
 }

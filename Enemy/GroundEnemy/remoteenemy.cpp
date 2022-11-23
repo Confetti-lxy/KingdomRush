@@ -45,7 +45,7 @@ remoteenemy::remoteenemy() {
     if (!remoteenemy::load()) {
         return;
     }
-    setBase(enemyImage.enemyleft1_Img);
+    SetBase(enemyImage.enemyleft1_Img);
 
     // Barbarian的属性设置
     Type = Remoteenemy;

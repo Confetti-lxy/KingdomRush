@@ -2,7 +2,10 @@
 
 
 build::build(QWidget *page) {
+    // 上层页面的设置
     this->page = page;
+
+    // 图片素材的加载
     if (!RemoteCellImg.load(":/image/remote_cell.png")) {
         qDebug() << "picture loaded failed";
         return;
@@ -12,6 +15,7 @@ build::build(QWidget *page) {
         return;
     }
 
+    // 边框圈的图片素材的加载
     Circle = new QLabel;
     Circle->hide();
     Circle->setParent(page);
@@ -20,15 +24,14 @@ build::build(QWidget *page) {
     Circle->setPixmap(CircleImg);
     Circle->setBaseSize(QSize(CircleImg.width(), CircleImg.height()));
     Circle->setAttribute(Qt::WA_TransparentForMouseEvents);
-    set(RemoteCellImg);
+    SetIcon(RemoteCellImg);
     setAttribute(Qt::WA_TransparentForMouseEvents);
     show();
-    auto *tower1 = new architecture(":/image/tower_1_btn.png"),
-            *tower2 = new architecture(":/image/tower_2_btn.png"),
-            *tower3 = new architecture(":/image/tower_3_btn.png");
-    architectures.push_back(tower1);
-    architectures.push_back(tower2);
-    architectures.push_back(tower3);
+
+    // 3种防御塔单位的图片素材的加载
+    architectures[0] = new architecture(":/image/tower1_btn.png");
+    architectures[1] = new architecture(":/image/tower2_btn.png");
+    architectures[2] = new architecture(":/image/tower3_btn.png");
     for (auto architecture: architectures) {
         architecture->setParent(page);
         architecture->hide();
@@ -65,10 +68,3 @@ void build::PressEvent(int x, int y) {
     }
 }
 
-void build::setState(bool s) {
-    this->state = s;
-}
-
-void build::setRng(int r) {
-    this->rng = r;
-}

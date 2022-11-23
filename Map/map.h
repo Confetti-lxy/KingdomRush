@@ -12,7 +12,6 @@ private:
     int m_len = 1050, m_height = 630, width = 70;// 地图长宽和每个格子的边长，必要时可以修改
     QVector <QVector<cell_type>> grid = QVector < QVector < cell_type >> (13, QVector<cell_type>(9));//地块类型的数组
     QPixmap StoneImg, RemoteImg, CloseImg, StartImg, EndImg; // 图片加载
-    QVector<build *> allRemotes;// 远程塔的部署单位数组
 
     bool load();// 图片素材的加载
 
@@ -21,6 +20,7 @@ private:
 public:
 
     QVector <road> allRoads;// 所有的路线数组
+    QVector<build *> allRemotes;// 远程塔的部署单位数组
 
     Map();// 基础构造函数
 

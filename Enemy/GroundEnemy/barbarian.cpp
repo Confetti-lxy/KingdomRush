@@ -41,7 +41,7 @@ barbarian::barbarian() {
     if (!barbarian::load()) {
         return;
     }
-    setBase(enemyImage.enemyleft1_Img);
+    SetBase(enemyImage.enemyleft1_Img);
 
     // Barbarian的属性设置
     Type = Barbarian;

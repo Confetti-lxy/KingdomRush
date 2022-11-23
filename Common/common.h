@@ -20,18 +20,62 @@ using namespace std;
 #include <QIcon>
 
 // 图片设置1
-#define set(pix)\
+#define SetIcon(pix)\
     setFixedSize(pix.width(),pix.height());\
     setStyleSheet("QPushButton{border:Opx;}");\
     setIcon(pix);\
     setIconSize(QSize(pix.width(),pix.height()));
 
 // 图片设置2
-#define setBase(pix)\
+#define SetBase(pix)\
     setFixedSize(pix.width(),pix.height());\
     setStyleSheet("QPushButton{border:Opx;}");\
     setPixmap(pix);\
     setBaseSize(QSize(pix.width(),pix.height()));
+
+// 图片设置3
+#define pointerSet(pointer, x, y)\
+    pointer = new QLabel;\
+    pointer->setParent(this);\
+    pointer->setPixmap(pix);\
+    pointer->move(x,y);\
+    pointer->setFixedSize(pix.width(),pix.height());
+
+// defender单位的初始化宏定义，包含单位初始化，按钮设置以及链接,主要应用于level.cpp
+#define defenderInit(pointer, x, y, m, n)\
+    pointer->set_map(my_map);\
+    pointer->setParent(this);\
+    pointer->move(x, y);\
+    pointer->show();\
+    pointer->get_deploy()->setParent(this);\
+    pointer->get_deploy()->show();\
+    pointer->get_deploy()->move(m,n);\
+    connect(pointer->get_deploy(), &deploy::click_deploy, \
+            pointer, &defender::defenderDeploy);\
+    connect(pointer->get_deploy(), &deploy::release_deploy, \
+            pointer,&defender::mouseReleaseEvent);
+
+
+#define pointerSetIcon(pointer)\
+    pointer= new QPushButton;\
+    pointer->setParent(this);\
+    pointer->setIcon(pix);\
+    pointer->setFixedSize(pix.width(),pix.height());\
+    pointer->setStyleSheet("QPushButton{border:0px;}");\
+    pointer->setIconSize(QSize(pix.width(),pix.height()));\
+    pointer->hide();
+
+#define levelConnect(L)\
+    connect(this, &Widget::openLevel, L, &level::gameStart);\
+    connect(L, &level::levelBack, this, [=]() {\
+        L->hide();\
+        this->show();\
+        status->show();\
+    });\
+    this->hide();\
+    L->show();\
+    emit openLevel();\
+
 
 enum direction_type {
     d_right,

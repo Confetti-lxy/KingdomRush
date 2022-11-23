@@ -2,7 +2,7 @@
 
 bullet::bullet(QPixmap bulletImg) {
     this->bulletImg = bulletImg;
-    setBase(this->bulletImg);
+    SetBase(this->bulletImg);
     this->hide();
 }
 

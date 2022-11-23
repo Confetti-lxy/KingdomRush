@@ -16,7 +16,7 @@ guard::guard() {
     }
 
     // 图片设置
-    setBase(guardImg);
+    SetBase(guardImg);
 
     // soldier单位的数值设计
     Type = Guard;

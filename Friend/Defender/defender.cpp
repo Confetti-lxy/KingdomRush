@@ -25,7 +25,7 @@ void defender::beAttacked(int atk) {
     existLife -= atk;
 }
 
-void defender::Deploy(QMouseEvent *click) {
+void defender::mouseReleaseEvent(QMouseEvent *click) {
     if (location_check(click)) {
         show();
         set_IsDep(true);

@@ -60,7 +60,7 @@ public:
     virtual bool location_check(QMouseEvent *click) = 0;// 位置检查
 
     // 实函数，在所有子类中共用
-    void Deploy(QMouseEvent *click);// 单位部署
+    void mouseReleaseEvent(QMouseEvent *click);// 单位部署
 
 
 
