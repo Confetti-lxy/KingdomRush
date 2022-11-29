@@ -28,17 +28,6 @@ public:
 
     void update(QWidget *page);// 根据grid数组来生成地图的图片素材
 
-
-
-
-
-
-
-
-
-
-
-
     // 一系列的get和set函数
     int get_len() const { return m_len; }
 

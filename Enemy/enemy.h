@@ -4,6 +4,7 @@
 #include "Map/map.h"
 #include "EnemyState/enemystate.h"
 #include "Friend/Defender/defender.h"
+#include "Common/Blood/blood.h"
 
 class defender;
 
@@ -16,6 +17,7 @@ private:
 
     int allLife, existLife;// 全部生命和现存生命
     bool isAlive;// 是否存活
+    blood *life;// 血条
 
     int speed; // 移动速度
     int moveInterval;// 移动间隔，和speed想对应
@@ -30,6 +32,7 @@ private:
 
     vector <enemyState> states;// 敌人的buff状态
 
+    int distance;// 某种距离
 
 public:
     Map *my_map;
@@ -43,22 +46,15 @@ public:
     bool statusChecking(); // 生命值检查
     double distance_cal(int friend_x, int friend_y);// 计算与我方单位的距离
     bool enterEnd();// 是否抵达终点
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    virtual bool judge_defender(defender *d) = 0;// 选择攻击的敌人
+    virtual void moveAnimation() = 0;// 移动动画
+    virtual void attackAnimation() = 0; // 攻击动画
+    virtual void enemyMove(int road_loc, int step) = 0;// 敌人的移动
 
     // 下方一系列为set和get函数
+    Map *get_map() { return this->my_map; }
+
+    void set_map(Map *map) { this->my_map = map; }
 
     void set_attack(bool isAttack) { this->isAttack = isAttack; }
 
@@ -116,9 +112,15 @@ public:
 
     bool get_blocked() { return isBlocked; }
 
-    bool get_arrive() { return this->isArrive; }
+    bool get_arrive() { return enterEnd(); }
 
     void set_arrive(bool arrive) { this->isArrive = arrive; }
+
+    int get_dis() { return this->distance; }
+
+    void add_dis(int l) { this->distance += l; }
+
+    void be_blocked() { distance -= speed; }
 };
 
 #endif // ENEMY_H

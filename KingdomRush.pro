@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Common/Blood/blood.cpp \
     Common/Bullet/bullet.cpp \
     Common/Button/architecture.cpp \
     Common/Button/build.cpp \
@@ -17,6 +18,8 @@ SOURCES += \
     Common/common.cpp \
     Enemy/EnemyState/enemystate.cpp \
     Enemy/FlyEnemy/flyenemy.cpp \
+    Enemy/FlyEnemy/gargoyle.cpp \
+    Enemy/FlyEnemy/raptor.cpp \
     Enemy/GroundEnemy/barbarian.cpp \
     Enemy/GroundEnemy/groundenemy.cpp \
     Enemy/GroundEnemy/remoteenemy.cpp \
@@ -33,6 +36,7 @@ SOURCES += \
     widget.cpp
 
 HEADERS += \
+    Common/Blood/blood.h \
     Common/Bullet/bullet.h \
     Common/Button/architecture.h \
     Common/Button/build.h \
@@ -42,6 +46,8 @@ HEADERS += \
     Enemy/EnemyIntegration.h \
     Enemy/EnemyState/enemystate.h \
     Enemy/FlyEnemy/flyenemy.h \
+    Enemy/FlyEnemy/gargoyle.h \
+    Enemy/FlyEnemy/raptor.h \
     Enemy/GroundEnemy/barbarian.h \
     Enemy/GroundEnemy/groundenemy.h \
     Enemy/GroundEnemy/remoteenemy.h \

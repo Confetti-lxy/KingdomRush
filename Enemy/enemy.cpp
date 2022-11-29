@@ -7,6 +7,7 @@ enemy::enemy() {
     isBlocked = false;
     isAtkImg1 = true;
     isArrive = false;
+    distance = 0;
 }
 
 void enemy::beAttatked(int hurt) {
@@ -15,14 +16,18 @@ void enemy::beAttatked(int hurt) {
 }
 
 bool enemy::statusChecking() {
+    life->raise();
     if (!isAlive) {
-        hide();
+        life->hide();
+        this->hide();
         return false;
     } else if (isAlive && existLife <= 0) {
         isAlive = false;
-        hide();
+        lower();
+        life->hide();
         return false;
     } else {
+        life->set_len((70.0 * existLife) / allLife);
         return true;
     }
 }
@@ -47,54 +52,3 @@ bool enemy::enterEnd() {
     }
     return false;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

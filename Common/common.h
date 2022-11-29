@@ -55,7 +55,7 @@ using namespace std;
     connect(pointer->get_deploy(), &deploy::release_deploy, \
             pointer,&defender::mouseReleaseEvent);
 
-
+// 指针指向的Button单位的具体化
 #define pointerSetIcon(pointer)\
     pointer= new QPushButton;\
     pointer->setParent(this);\
@@ -65,6 +65,7 @@ using namespace std;
     pointer->setIconSize(QSize(pix.width(),pix.height()));\
     pointer->hide();
 
+// 关卡链接
 #define levelConnect(L)\
     connect(this, &Widget::openLevel, L, &level::gameStart);\
     connect(L, &level::levelBack, this, [=]() {\
@@ -75,6 +76,17 @@ using namespace std;
     this->hide();\
     L->show();\
     emit openLevel();\
+
+// 成功和失败见面的跳转
+#define FaceBounce(page)\
+    page->show();\
+    page->move(labels.victoryInterface->x(),-434);\
+    QPropertyAnimation *animation=new QPropertyAnimation(page,"geometry");\
+    animation->setDuration(1000);\
+    animation->setStartValue(QRect(QPoint(page->x(),page->y()),QPoint(page->x()+page->width(),page->height())));\
+    animation->setEndValue(QRect(QPoint(page->x(),page->y()+500),QPoint(page->x()+page->width(),page->height()+120)));\
+    animation->setEasingCurve(QEasingCurve::InOutBounce);\
+    animation->start();
 
 
 enum direction_type {
@@ -101,8 +113,8 @@ enum cell_type {
 enum EnemyType {
     Barbarian,
     Remoteenemy,
-    fly_enemy_01,
-    fly_enemy_02,
+    Gargoyle,
+    Raptor,
 };// 敌方种类
 
 enum DefenderType {
@@ -129,6 +141,17 @@ struct groundEnemyImage {
     QPixmap enemyattackright1_Img;
     QPixmap enemyattackright2_Img;
 };// 地面敌人的图片素材
+
+struct flyEnemyImage {
+    QPixmap enemyleft1_Img;
+    QPixmap enemyleft2_Img;
+    QPixmap enemyleft3_Img;
+    QPixmap enemyleft4_Img;
+    QPixmap enemyright1_Img;
+    QPixmap enemyright2_Img;
+    QPixmap enemyright3_Img;
+    QPixmap enemyright4_Img;
+};// 飞行敌人的图片素材
 
 struct defenderImage {
     QPixmap soldierImg;

@@ -3,6 +3,7 @@
 
 #include "Level/level.h"
 
+// 这个类是用于完整的游戏表述的类，包含游戏的起始和选关界面，与后续的level相关联
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -12,7 +13,7 @@ class Widget : public QWidget {
     Q_OBJECT
 private:
     Ui::Widget *ui;
-    bool state = false;// 状态设置参数
+    bool state = false;// 状态设置参数，游戏是否开始
     QLabel *status;
 public:
     Widget(QWidget *parent = nullptr);// 构造函数

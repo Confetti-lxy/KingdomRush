@@ -14,7 +14,6 @@ build::build(QWidget *page) {
         qDebug() << "picture loaded failed";
         return;
     }
-
     // 边框圈的图片素材的加载
     Circle = new QLabel;
     Circle->hide();
@@ -27,7 +26,6 @@ build::build(QWidget *page) {
     SetIcon(RemoteCellImg);
     setAttribute(Qt::WA_TransparentForMouseEvents);
     show();
-
     // 3种防御塔单位的图片素材的加载
     architectures[0] = new architecture(":/image/tower1_btn.png");
     architectures[1] = new architecture(":/image/tower2_btn.png");
@@ -49,8 +47,8 @@ void build::PressEvent(int x, int y) {
         } else {
             if (x >= this->x() && x <= this->x() + this->width()
                 && y >= this->y() && y <= this->y() + this->height()) {
-                double x_ = this->x() + 0.5 * this->width() - 0.5 * Circle->width(),
-                        y_ = this->y() + 0.5 * this->height() - 0.5 * Circle->height();
+                double x_ = this->x() + 0.5 * (this->width() - Circle->width()),
+                        y_ = this->y() + 0.5 * (this->height() - Circle->height());
                 Circle->move(int(x_), int(y_));
                 Circle->show();
                 Circle->raise();
@@ -67,4 +65,3 @@ void build::PressEvent(int x, int y) {
         }
     }
 }
-

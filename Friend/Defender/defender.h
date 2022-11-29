@@ -108,8 +108,6 @@ public:
 
     deploy *get_deploy() { return my_deploy; }
 
-    bool get_isDeploy() { return isDeploy; }
-
     void set_IsDep(bool isDeploy) { this->isDeploy = isDeploy; }
 
     bool get_IsDep() { return isDeploy; }

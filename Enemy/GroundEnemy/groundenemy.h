@@ -24,7 +24,6 @@ public:
 
     // 实函数，在所有子类中共用
     void enemyMove(int road_loc, int step);// 地面敌人的移动
-    void Lock_defender();//锁定敌人
 
 
 };

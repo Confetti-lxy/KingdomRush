@@ -42,7 +42,7 @@ void ticket::press(QMouseEvent *event) {
         }
         SetIcon(pix);
     }
-    return press(event);
+    return QPushButton::mousePressEvent(event);
 }
 
 
@@ -55,7 +55,7 @@ void ticket::release(QMouseEvent *event) {
         }
         SetIcon(pix);
     }
-    return mouseReleaseEvent(event);
+    return QPushButton::mouseReleaseEvent(event);
 }
 
 

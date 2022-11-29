@@ -43,8 +43,3 @@ int road::transToLoc(int step, int &x, int &y) const {
     y = y_loc;
     return ans;
 }
-
-
-
-
-

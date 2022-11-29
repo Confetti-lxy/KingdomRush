@@ -25,19 +25,24 @@ private:
     bool isOver, isWin;// 判断是否胜利，是否游戏结束
     bool isDoubleSpeed;// 判断是否为二倍速
 
+    int enemyNum = 100;// 敌人数量
 
     void FriDefenderInit();// 3个友方defender单位的初始化
     void labelInit();// 标签组件的初始化
     void buttonInit();// 按钮组件的初始化
+    void clearCompany();// 清空单位
+    void putDown();// 友方defender单位的部署
+    void Sleep(int sec) {}// 睡眠时间
 public:
     level();// 基础的构造函数，可忽略不计
     level(int Level);// Level为关卡等级
 
     // 功能函数
 
-    void makeWar();//
-    void gameStart();//
-    void restart();//
+    void makeWar();// 游戏局内各单位的计算与动作运行
+    void gameStart();// 游戏开始
+    void restart();// 重新开始
+    void EnemyDistribution(int num1, int num2, int num3, int num4);// 敌人数量的分配
 
     signals:
             void levelBack();

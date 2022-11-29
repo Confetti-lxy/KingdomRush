@@ -105,16 +105,6 @@ void remoteenemy::attack() {
 }
 
 void remoteenemy::attackAnimation() {
-    if (bulletStatu == 0) {
-        bullet *b = new bullet(bulletImg);
-        b->move(this->x(), y() + 25);
-        b->setParent(this->parentWidget());
-        b->show();
-        b->ballistic(get_defender());
-        bulletStatu++;
-    } else {
-        bulletStatu = (bulletStatu + 1) % 5;
-    }
     if (x() > get_defender()->x()) {
         if (!get_atkImg()) {
             setPixmap(enemyImage.enemyattackleft1_Img);
@@ -132,25 +122,14 @@ void remoteenemy::attackAnimation() {
             set_atkImg(false);
         }
     }
+    if (bulletStatu == 0) {
+        bullet *b = new bullet(bulletImg);
+        b->move(x() + 60, y() + 25);
+        b->setParent(this->parentWidget());
+        b->show();
+        b->ballistic(get_defender());
+        bulletStatu++;
+    } else {
+        bulletStatu = (bulletStatu + 1) % 5;
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
