@@ -85,7 +85,7 @@ using namespace std;
     animation->setDuration(1000);\
     animation->setStartValue(QRect(QPoint(page->x(),page->y()),QPoint(page->x()+page->width(),page->height())));\
     animation->setEndValue(QRect(QPoint(page->x(),page->y()+500),QPoint(page->x()+page->width(),page->height()+120)));\
-    animation->setEasingCurve(QEasingCurve::InOutBounce);\
+    animation->setEasingCurve(QEasingCurve::OutBounce);\
     animation->start();
 
 
