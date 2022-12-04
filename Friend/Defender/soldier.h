@@ -20,7 +20,6 @@ public:
 
 
     // 鼠标动作，相关的部署函数
-    void defenderDeploy(QMouseEvent *click) override;// 鼠标点击部署位置，下放单位
     bool location_check(QMouseEvent *click) override;// 位置检查
 
 };

@@ -19,7 +19,6 @@ public:
     virtual void attackAnimation() = 0; // 攻击动画
     virtual void moveAnimation() = 0;// 移动动画
     virtual bool judge_defender(defender *d) = 0;// 选择攻击的defender
-    virtual bool judge_tower(tower *t) = 0;// 选择攻击的tower
     virtual void attack() = 0;// 攻击函数
 
     // 实函数，在所有子类中共用

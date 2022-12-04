@@ -1,14 +1,21 @@
 #include "defender.h"
 
+int extern coins;
+
 defender::defender() {
     isAlive = true;
     isAttack = false;
     isAtkImg1 = true;
     blockedEnemys.clear();
+    life = new blood;
+    life->setParent(this);
+    life->show();
+    life->raise();
 }
 
 bool defender::statusChecking() {
     if (existLife > 0 && isAlive) {
+        life->set_len(70.0 * allLife / existLife);
         return true;
     } else {
         isAlive = false;
@@ -26,12 +33,25 @@ void defender::beAttacked(int atk) {
 }
 
 void defender::mouseReleaseEvent(QMouseEvent *click) {
-    if (location_check(click)) {
+    if (location_check(click) && coins >= cost) {
         show();
+        coins -= cost;
         set_IsDep(true);
     } else {
         close();
     }
+}
+
+void defender::defenderDeploy(QMouseEvent *click) {
+    if (Type == Soldier)
+        this->move(click->x() + 895, click->y() - 20);
+    if (Type == Guard)
+        this->move(click->x() + 895, click->y() + 130);
+    if (Type == Dragon)
+        this->move(click->x() + 810, click->y() + 280);
+    this->show();
+    this->raise();
+    this->setAttribute(Qt::WA_TransparentForMouseEvents);
 }
 
 double defender::distance_cal(int enemy_x, int enemy_y) {

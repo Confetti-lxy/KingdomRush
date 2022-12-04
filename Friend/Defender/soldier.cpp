@@ -38,6 +38,7 @@ soldier::soldier() {
     // soldier单位的数值设计
     Type = Soldier;
     set_atk(400), set_rng(1);
+    set_cost(50);
     set_allLife(5000), set_existLife(5000);
     set_block(2);
 }
@@ -64,13 +65,6 @@ void soldier::attackAnimation(enemy *blockedEnemy) {
             set_atkImg(false);
         }
     }
-}
-
-void soldier::defenderDeploy(QMouseEvent *click) {
-    this->move(click->pos().x() + 895, click->pos().y() - 20);
-    this->show();
-    this->raise();
-    this->setAttribute(Qt::WA_TransparentForMouseEvents);
 }
 
 void soldier::attack() {

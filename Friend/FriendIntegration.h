@@ -6,5 +6,8 @@
 #include "./Defender/guard.h"
 #include "./Defender/dragon.h"
 #include "./Tower/tower.h"
+#include "./Tower/firetower.h"
+#include "./Tower/arrowtower.h"
+#include "./Tower/mercenarytower.h"
 
 #endif // FRIENDINTEGRATION_H

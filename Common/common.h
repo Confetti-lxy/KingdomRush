@@ -18,6 +18,7 @@ using namespace std;
 #include <QPainter>
 #include <QImage>
 #include <QIcon>
+#include <QCoreApplication>
 
 // 图片设置1
 #define SetIcon(pix)\
@@ -70,6 +71,7 @@ using namespace std;
     connect(this, &Widget::openLevel, L, &level::gameStart);\
     connect(L, &level::levelBack, this, [=]() {\
         L->hide();\
+        delete L;\
         this->show();\
         status->show();\
     });\
@@ -90,8 +92,8 @@ using namespace std;
 
 
 enum direction_type {
-    d_right,
     d_left,
+    d_right,
     d_front,
     d_back
 };//敌人的行进方向

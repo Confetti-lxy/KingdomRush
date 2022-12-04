@@ -28,6 +28,10 @@ SOURCES += \
     Friend/Defender/dragon.cpp \
     Friend/Defender/guard.cpp \
     Friend/Defender/soldier.cpp \
+    Friend/Tower/arrowtower.cpp \
+    Friend/Tower/firetower.cpp \
+    Friend/Tower/mercenarytower.cpp \
+    Friend/Tower/range.cpp \
     Friend/Tower/tower.cpp \
     Level/level.cpp \
     Map/map.cpp \
@@ -57,6 +61,10 @@ HEADERS += \
     Friend/Defender/guard.h \
     Friend/Defender/soldier.h \
     Friend/FriendIntegration.h \
+    Friend/Tower/arrowtower.h \
+    Friend/Tower/firetower.h \
+    Friend/Tower/mercenarytower.h \
+    Friend/Tower/range.h \
     Friend/Tower/tower.h \
     Level/level.h \
     Map/map.h \

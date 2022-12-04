@@ -12,7 +12,7 @@ private:
     architectureLoc;
 
 public:
-    explicit architecture(const QString &architecturePath);
+    architecture(const QString &architecturePath);
 
     signals:
 };

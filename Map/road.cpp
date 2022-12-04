@@ -2,9 +2,9 @@
 
 
 direction_type road::direction(int loc) const {
-    if (location[loc + 1][0] == location[loc][1] + 1) {
+    if (location[loc + 1][0] == location[loc][0] + 1) {
         return d_right;
-    } else if (location[loc + 1][0] == location[loc][1] - 1) {
+    } else if (location[loc + 1][0] == location[loc][0] - 1) {
         return d_left;
     } else if (location[loc + 1][1] == location[loc][1] + 1) {
         return d_back;

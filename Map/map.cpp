@@ -90,6 +90,7 @@ Map::Map(QString path) {
 
 
 void Map::update(QWidget *page) {
+    int num = 0;
     // -2是因为最右的2个竖排为界面显示栏，不属于地图区域
     for (int i = 0; i < m_len / width - 2; i++) {
         for (int j = 0; j < m_height / width; j++) {
@@ -99,22 +100,29 @@ void Map::update(QWidget *page) {
             } else if (grid[i][j] == close_cell) {
                 label->setPixmap(CloseImg);
             } else if (grid[i][j] == remote_cell) {
-                // 远程部署单位的地块设置
-                build *new_remote = new build(page);
-                new_remote->move(i * width, j * width - 30);
-                new_remote->setParent(page);
-                allRemotes.push_back(new_remote);
+                num++;
             } else if (grid[i][j] == start_cell) {
                 label->setPixmap(StartImg);
             } else {
                 label->setPixmap(EndImg);
             }
-            if (grid[i][j] != remote_cell) {
-                label->setStyleSheet("QPushButton{border:Opx;}");
-                label->setFixedSize(width, width);
-                label->setParent(page);
-                label->move(i * width, j * width);
-                label->show();
+            label->setStyleSheet("QPushButton{border:Opx;}");
+            label->setFixedSize(width, width);
+            label->setParent(page);
+            label->move(i * width, j * width);
+            label->show();
+        }
+    }
+    allRemotes.resize(num);
+    num = 0;
+    for (int i = 0; i < m_len / width - 2; i++) {
+        for (int j = 0; j < m_height / width; j++) {
+            if (grid[i][j] == remote_cell) {
+                // 远程部署单位的地块设置
+                allRemotes[num] = new build(page);
+                allRemotes[num]->move(i * width, j * width - 30);
+                allRemotes[num]->setParent(page);
+                num++;
             }
         }
     }

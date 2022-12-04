@@ -9,7 +9,7 @@
 class defender;
 
 class enemy : public QLabel {
-private:
+protected:
 
     int atk, rng;   // 攻击力和攻击范围
     bool isAttack;  // 是否在战斗状态

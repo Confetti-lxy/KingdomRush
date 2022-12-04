@@ -6,6 +6,8 @@
 #include "./GroundEnemy/barbarian.h"
 #include "./GroundEnemy/remoteenemy.h"
 #include "./FlyEnemy/flyenemy.h"
+#include "./FlyEnemy/gargoyle.h"
+#include "./FlyEnemy/raptor.h"
 #include "./EnemyState/enemystate.h"
 
 

@@ -21,6 +21,7 @@ guard::guard() {
     // soldier单位的数值设计
     Type = Guard;
     set_atk(0), set_rng(0);
+    set_cost(80);
     set_allLife(10000), set_existLife(10000);
     set_block(3);
 }
@@ -31,13 +32,6 @@ void guard::attackAnimation(enemy *blockedEnemy) {
 
 void guard::attack() {
     // 坚果墙类型的单位，不会攻击，因此攻击函数设置为空函数
-}
-
-void guard::defenderDeploy(QMouseEvent *click) {
-    this->move(click->pos().x() + 895, click->pos().y() + 130);
-    this->show();
-    this->raise();
-    this->setAttribute(Qt::WA_TransparentForMouseEvents);
 }
 
 bool guard::location_check(QMouseEvent *click) {

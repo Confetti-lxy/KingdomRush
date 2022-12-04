@@ -6,7 +6,9 @@ blood::blood() {
 
 void blood::piantEvent(QPaintEvent *event) {
     QPainter painter(this);
-    QBrush brush(QColor("#F20900"));// 刷子为红色
+    QColor color("#F20900");
+    color.setAlpha(100);
+    QBrush brush(color);// 刷子为红色
     painter.setBrush(brush);
     painter.drawRect(this->x() + t, this->y() - 5, len, 100);
 }

@@ -53,7 +53,7 @@ void Widget::mousePressEvent(QMouseEvent *click) {
         if (click->pos().x() >= 222 && click->pos().x() <= 327
             && click->pos().y() >= 180 && click->pos().y() <= 280) {
             level *L1 = new level(1);
-            levelConnect(L1);
+            levelConnect(L1)
         } else if (click->pos().x() >= 486 && click->pos().x() <= 564
                    && click->pos().y() >= 63 && click->pos().y() <= 162) {
             level *L2 = new level(2);

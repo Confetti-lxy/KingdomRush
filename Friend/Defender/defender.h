@@ -3,6 +3,7 @@
 
 #include "Map/map.h"
 #include "Common/Button/deploy.h"
+#include "Common/Blood/blood.h"
 #include "Enemy/enemy.h"
 
 class enemy;
@@ -17,11 +18,12 @@ private:
 
     int allLife, existLife;// 全部生命和现存生命
     bool isAlive;// 是否存活
+    blood *life;// 血条
 
     int block_num;// 最大阻挡数
     QVector<enemy *> blockedEnemys;// 所阻挡的敌人
 
-
+    int cost;// 部署费用
     bool isDeploy = false; // 是否成功部署
 
     virtual bool load() = 0;// 图片加载函数，在子类中重写
@@ -42,7 +44,7 @@ public:
 
     // 虚函数，在子类中细化
     virtual void attackAnimation(enemy *blockedEnemy) = 0; // 攻击动画
-    virtual void defenderDeploy(QMouseEvent *click) = 0;// 鼠标点击部署位置，下方单位
+    void defenderDeploy(QMouseEvent *click);// 鼠标点击部署位置，下方单位
     virtual void attack() = 0;// 攻击敌人
 
 
@@ -61,12 +63,6 @@ public:
 
     // 实函数，在所有子类中共用
     void mouseReleaseEvent(QMouseEvent *click);// 单位部署
-
-
-
-
-
-
 
 
     // 以下是一系列set和get函数
@@ -113,6 +109,8 @@ public:
     bool get_IsDep() { return isDeploy; }
 
     void set_map(Map *my_map) { this->my_map = my_map; }
+
+    void set_cost(int cost) { this->cost = cost; }
 
 };
 

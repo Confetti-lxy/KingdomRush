@@ -22,7 +22,7 @@ private:
 
     int existLife;// 人物剩余生命
 
-    bool isOver, isWin;// 判断是否胜利，是否游戏结束
+    bool isOver = false, isWin = false;// 判断是否胜利，是否游戏结束
     bool isDoubleSpeed;// 判断是否为二倍速
 
     int enemyNum = 100;// 敌人数量
@@ -32,7 +32,7 @@ private:
     void buttonInit();// 按钮组件的初始化
     void clearCompany();// 清空单位
     void putDown();// 友方defender单位的部署
-    void Sleep(int sec) {}// 睡眠时间
+    void Sleep(int sec);// 睡眠时间
 public:
     level();// 基础的构造函数，可忽略不计
     level(int Level);// Level为关卡等级
@@ -43,6 +43,7 @@ public:
     void gameStart();// 游戏开始
     void restart();// 重新开始
     void EnemyDistribution(int num1, int num2, int num3, int num4);// 敌人数量的分配
+    void mousePressEvent(QMouseEvent *event);
 
     signals:
             void levelBack();

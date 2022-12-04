@@ -78,7 +78,7 @@ gargoyle::gargoyle() {
     }
     SetBase(enemyImage.enemyleft1_Img);
     Type = Gargoyle;
-    set_atk(300), set_rng(2);
+    set_atk(50), set_rng(2);
     set_allLife(2000), set_existLife(2000);
     set_speed(4), set_interval(2000), set_direction(e_left);
     set_defender(nullptr);
@@ -94,55 +94,52 @@ void gargoyle::attack() {
 }
 
 void gargoyle::moveAnimation() {
-    if (get_direction() == e_left) {
-        switch (imageCount) {
-            case 0:
-                setPixmap(enemyImage.enemyleft1_Img);
-                resize(QSize(enemyImage.enemyleft1_Img.width(), enemyImage.enemyleft1_Img.height()));
-                break;
-            case 1:
-                setPixmap(enemyImage.enemyleft2_Img);
-                resize(QSize(enemyImage.enemyleft2_Img.width(), enemyImage.enemyleft2_Img.height()));
-                break;
-            case 2:
-                setPixmap(enemyImage.enemyleft3_Img);
-                resize(QSize(enemyImage.enemyleft3_Img.width(), enemyImage.enemyleft3_Img.height()));
-                break;
-            case 3:
-                setPixmap(enemyImage.enemyleft4_Img);
-                resize(QSize(enemyImage.enemyleft4_Img.width(), enemyImage.enemyleft4_Img.height()));
-                break;
+    if (get_alive()) {
+        if (get_direction() == e_left) {
+            switch (imageCount) {
+                case 0:
+                    setPixmap(enemyImage.enemyleft1_Img);
+                    resize(QSize(enemyImage.enemyleft1_Img.width(), enemyImage.enemyleft1_Img.height()));
+                    break;
+                case 1:
+                    setPixmap(enemyImage.enemyleft2_Img);
+                    resize(QSize(enemyImage.enemyleft2_Img.width(), enemyImage.enemyleft2_Img.height()));
+                    break;
+                case 2:
+                    setPixmap(enemyImage.enemyleft3_Img);
+                    resize(QSize(enemyImage.enemyleft3_Img.width(), enemyImage.enemyleft3_Img.height()));
+                    break;
+                case 3:
+                    setPixmap(enemyImage.enemyleft4_Img);
+                    resize(QSize(enemyImage.enemyleft4_Img.width(), enemyImage.enemyleft4_Img.height()));
+                    break;
+            }
+        } else {
+            switch (imageCount) {
+                case 0:
+                    setPixmap(enemyImage.enemyright1_Img);
+                    resize(QSize(enemyImage.enemyright1_Img.width(), enemyImage.enemyright1_Img.height()));
+                    break;
+                case 1:
+                    setPixmap(enemyImage.enemyright2_Img);
+                    resize(QSize(enemyImage.enemyright2_Img.width(), enemyImage.enemyright2_Img.height()));
+                    break;
+                case 2:
+                    setPixmap(enemyImage.enemyright3_Img);
+                    resize(QSize(enemyImage.enemyright3_Img.width(), enemyImage.enemyright3_Img.height()));
+                    break;
+                case 3:
+                    setPixmap(enemyImage.enemyright4_Img);
+                    resize(QSize(enemyImage.enemyright4_Img.width(), enemyImage.enemyright4_Img.height()));
+                    break;
+            }
         }
-    } else {
-        switch (imageCount) {
-            case 0:
-                setPixmap(enemyImage.enemyright1_Img);
-                resize(QSize(enemyImage.enemyright1_Img.width(), enemyImage.enemyright1_Img.height()));
-                break;
-            case 1:
-                setPixmap(enemyImage.enemyright2_Img);
-                resize(QSize(enemyImage.enemyright2_Img.width(), enemyImage.enemyright2_Img.height()));
-                break;
-            case 2:
-                setPixmap(enemyImage.enemyright3_Img);
-                resize(QSize(enemyImage.enemyright3_Img.width(), enemyImage.enemyright3_Img.height()));
-                break;
-            case 3:
-                setPixmap(enemyImage.enemyright4_Img);
-                resize(QSize(enemyImage.enemyright4_Img.width(), enemyImage.enemyright4_Img.height()));
-                break;
-        }
+        imageCount = (imageCount + 1) % 4;
     }
-    imageCount = (imageCount + 1) % 4;
 }
 
 void gargoyle::attackAnimation() {
-    QLabel *t;
-    if (get_defender() == nullptr) {
-        t = get_tower();
-    } else {
-        t = get_defender();
-    }
+    QLabel *t = get_defender();
     if (bulletStatu == 0) {
         bullet *b = new bullet(bulletImg);
         if (get_direction() == e_right) {
@@ -155,14 +152,21 @@ void gargoyle::attackAnimation() {
         b->ballistic(t);
         bulletStatu++;
     } else {
-        bulletStatu = (bulletStatu + 1) % 5;
+        bulletStatu = (bulletStatu + 1) % 10;
     }
 }
 
 bool gargoyle::judge_defender(defender *d) {
-    return true;
+    int width = my_map->get_width();
+    double dis = get_rng() * width;
+    if (d->get_alive()) {
+        if (distance_cal(d->x(), d->y()) <= dis) {
+            set_defender(d);
+            attack();
+            return true;
+        }
+    }
+    return false;
 }
 
-bool gargoyle::judge_tower(tower *t) {
-    return true;
-}
+

@@ -8,7 +8,12 @@ enemy::enemy() {
     isAtkImg1 = true;
     isArrive = false;
     distance = 0;
+    life = new blood;
+    life->setParent(this);
+    life->show();
+    life->raise();
 }
+
 
 void enemy::beAttatked(int hurt) {
     existLife -= hurt;
@@ -28,6 +33,7 @@ bool enemy::statusChecking() {
         return false;
     } else {
         life->set_len((70.0 * existLife) / allLife);
+        life->raise();
         return true;
     }
 }
@@ -39,15 +45,25 @@ double enemy::distance_cal(int friend_x, int friend_y) {
 }
 
 bool enemy::enterEnd() {
-    if (!get_arrive()) {
+    if (!isArrive) {
         int index = get_index(), width = my_map->get_width();
         int length = my_map->allRoads[index].get_len();
         int x_len = my_map->allRoads[index].get_loc(length - 1, 0) * width;
         int y_len = my_map->allRoads[index].get_loc(length - 1, 1) * width;
-        if (x() <= x_len + 10 && x() >= x_len - 10 && y() >= y_len - 10 && y() <= y_len + 10) {
-            set_arrive(true);
-            set_alive(false);
-            return true;
+        if (Type == Gargoyle) {
+            if (x() <= x_len + 30 && x() >= x_len - 30 && y() >= y_len - 30 && y() <= y_len + 30) {
+                set_arrive(true);
+                set_alive(false);
+                qDebug() << Type << get_alive();
+                return true;
+            }
+        } else {
+            if (x() <= x_len + 10 && x() >= x_len - 10 && y() >= y_len - 10 && y() <= y_len + 10) {
+                set_arrive(true);
+                set_alive(false);
+                qDebug() << Type << get_alive();
+                return true;
+            }
         }
     }
     return false;

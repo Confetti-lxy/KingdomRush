@@ -53,15 +53,9 @@ dragon::dragon() {
     // soldier单位的数值设计
     Type = Dragon;
     set_atk(600), set_rng(2);
+    set_cost(100);
     set_allLife(6000), set_existLife(6000);
     set_block(2);
-}
-
-void dragon::defenderDeploy(QMouseEvent *click) {
-    this->move(click->pos().x() + 810, click->pos().y() + 280);
-    this->show();
-    this->raise();
-    this->setAttribute(Qt::WA_TransparentForMouseEvents);
 }
 
 bool dragon::location_check(QMouseEvent *click) {
