@@ -1,5 +1,7 @@
 #include "remoteenemy.h"
 
+extern QVector<bullet*> bullets;
+
 bool remoteenemy::load() {
     if (!enemyImage.enemyleft1_Img.load(":/image/remoteenemyleft1.png")) {
         qDebug() << "picture load fail";
@@ -124,14 +126,17 @@ void remoteenemy::attackAnimation() {
             set_atkImg(false);
         }
     }
-    if (bulletStatu == 0) {
-        bullet *b = new bullet(bulletImg);
-        b->move(x() + 60, y() + 25);
-        b->setParent(this->parentWidget());
-        b->show();
-        b->ballistic(get_defender());
-        bulletStatu++;
-    } else {
-        bulletStatu = (bulletStatu + 1) % 10;
+    if(get_alive()) {
+        if (bulletStatu == 0) {
+            bullet *b = new bullet(bulletImg);
+            bullets.append(b);
+            b->move(x() + 60, y() + 25);
+            b->setParent(this->parentWidget());
+            b->show();
+            b->ballistic(get_defender());
+            bulletStatu++;
+        } else {
+            bulletStatu = (bulletStatu + 1) % 10;
+        }
     }
 }

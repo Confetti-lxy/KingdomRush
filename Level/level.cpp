@@ -1,6 +1,7 @@
 ﻿#include "level.h"
 
 int coins;// 剩余金币
+QVector<bullet*> bullets;
 
 void level::FriDefenderInit() {
     // soldier单位的初始化以及按钮的设置
@@ -109,6 +110,11 @@ void level::clearCompany() {
         enemy->hide();
     }
     AllEnemy.clear();
+
+    for(auto b:bullets) {
+        delete b;
+    }
+    bullets.clear();
 
     // 远程地块的清理
     for (int i = 0; i < my_map->allRemotes.size(); i++) {
@@ -261,12 +267,20 @@ void level::makeWar() {
     // 友方单位的攻击
     for (auto defender: AllDefender) {
         if (defender->statusChecking()) {
-            for (auto enemy: AllEnemy) {
-                if (defender->add_enemy(enemy)) {
-                    defender->attack();
-                    break;
+            //------------------------------------------------------------
+            // 修改后可以持续攻击
+            if(defender->get_blockEnemy().size() < defender->get_block()) {
+                for (auto enemy: AllEnemy) {
+                    if (defender->add_enemy(enemy)) {
+                        defender->attack();
+                    }
+                    if(defender->get_blockEnemy().size() == defender->get_block()) {
+                        break;
+                    }
                 }
             }
+            defender->attack();
+            //------------------------------------------------------------
         }
     }
     // 友方防御塔的攻击

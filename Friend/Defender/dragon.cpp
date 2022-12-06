@@ -52,7 +52,7 @@ dragon::dragon() {
 
     // soldier单位的数值设计
     Type = Dragon;
-    set_atk(600), set_rng(2);
+    set_atk(600), set_rng(1);
     set_cost(100);
     set_allLife(6000), set_existLife(6000);
     set_block(2);
@@ -127,12 +127,17 @@ void dragon::attack() {
         for (auto it = e.begin(); it != e.end(); it++) {
             if (!(*it)->statusChecking()) {
                 e.erase(it);
+                //----------------------------------------
+                // 防止只有一个单位时卡死
+                if(it == e.end()) break; //追加容错，防止崩溃
+                //----------------------------------------
             }
         }
         // 若存在被阻挡的敌人，则优先攻击先被阻挡的敌人
         if (!e.empty()) {
             e[0]->beAttatked(get_atk());
             attackAnimation(e[0]);
+
         }
             // 否则则变为初始的未攻击的状态
         else {
@@ -142,6 +147,12 @@ void dragon::attack() {
         }
         this->set_blockedEnemy(e);
     }
+    //-------------------------------------
+    // 阻挡单位
+    for (auto e: get_blockEnemy()) {
+        e->be_blocked();
+    }
+    //-------------------------------------
 }
 
 bool dragon::add_enemy(enemy *e) {
@@ -156,27 +167,4 @@ bool dragon::add_enemy(enemy *e) {
     }
     return false;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

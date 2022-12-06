@@ -73,6 +73,10 @@ void soldier::attack() {
         for (auto it = e.begin(); it != e.end(); it++) {
             if (!(*it)->statusChecking()) {
                 e.erase(it);
+                //----------------------------------------
+                // 防止只有一个单位时卡死
+                if(it == e.end()) break; //追加容错，防止崩溃
+                //----------------------------------------
             }
         }
         // 若存在被阻挡的敌人，则优先攻击先被阻挡的敌人
@@ -88,6 +92,12 @@ void soldier::attack() {
         }
         this->set_blockedEnemy(e);
     }
+    //-------------------------------------
+    // 阻挡单位
+    for (auto e: get_blockEnemy()) {
+        e->be_blocked();
+    }
+    //-------------------------------------
 }
 
 bool soldier::location_check(QMouseEvent *click) {

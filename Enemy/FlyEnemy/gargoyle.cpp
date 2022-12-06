@@ -1,5 +1,7 @@
 #include "gargoyle.h"
 
+extern QVector<bullet*> bullets;
+
 bool gargoyle::load() {
     if (!enemyImage.enemyleft1_Img.load(":/image/enemyflyleft1.png")) {
         qDebug() << "picture load fail";
@@ -139,20 +141,24 @@ void gargoyle::moveAnimation() {
 }
 
 void gargoyle::attackAnimation() {
-    QLabel *t = get_defender();
-    if (bulletStatu == 0) {
-        bullet *b = new bullet(bulletImg);
-        if (get_direction() == e_right) {
-            b->move(x() + 60, y() + 25);
+    if(get_alive() && get_defender() != nullptr) {
+        QLabel *t = get_defender();
+        if (bulletStatu == 0) {
+            bullet *b = new bullet(bulletImg);
+            bullets.append(b);
+            if (get_direction() == e_right) {
+                b->move(x() + 60, y() + 25);
+            } else {
+                b->move(x(), y() + 27);
+            }
+            b->setParent(this->parentWidget());
+            b->show();
+            b->ballistic(t);
+//            delete b;
+            bulletStatu++;
         } else {
-            b->move(x(), y() + 27);
+            bulletStatu = (bulletStatu + 1) % 10;
         }
-        b->setParent(this->parentWidget());
-        b->show();
-        b->ballistic(t);
-        bulletStatu++;
-    } else {
-        bulletStatu = (bulletStatu + 1) % 10;
     }
 }
 
