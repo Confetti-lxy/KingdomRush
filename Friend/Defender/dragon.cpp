@@ -56,6 +56,7 @@ dragon::dragon() {
     set_cost(100);
     set_allLife(6000), set_existLife(6000);
     set_block(2);
+    get_blood()->set_t(60);
 }
 
 bool dragon::location_check(QMouseEvent *click) {

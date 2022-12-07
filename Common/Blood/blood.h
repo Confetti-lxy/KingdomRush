@@ -10,7 +10,7 @@ private:
     int t = 0;//
 public:
     blood();// 构造函数
-    void piantEvent(QPaintEvent *);
+    void paintEvent(QPaintEvent *);
 
     // 一系列的get和set函数
     void set_len(int len) { this->len = len; }

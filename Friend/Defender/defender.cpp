@@ -16,12 +16,12 @@ defender::defender() {
 bool defender::statusChecking() {
     //---------------------------------------------------
     // 防止dragon单位出现莫名奇妙的位移
-    if (Type == Dragon && get_alive() && x() < 0) {
+    if (get_alive() && x() < 0) {
         move(x() + 4623, y());
     }
     //---------------------------------------------------
     if (existLife > 0 && isAlive) {
-        life->set_len(70.0 * allLife / existLife);
+        life->set_len(70.0 * existLife / allLife);
         return true;
     } else {
         isAlive = false;

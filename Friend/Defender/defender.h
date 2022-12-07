@@ -112,6 +112,8 @@ public:
 
     void set_cost(int cost) { this->cost = cost; }
 
+    blood* get_blood() {return life;}
+
 };
 
 #endif // DEFENDER_H
