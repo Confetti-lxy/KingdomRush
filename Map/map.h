@@ -40,8 +40,6 @@ public:
     int get_road() { return allRoads.size(); }
 
     int get_remote() { return allRemotes.size(); }
-
-
 };
 
 #endif // MAP_H

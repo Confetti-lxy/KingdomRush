@@ -166,6 +166,7 @@ bool dragon::add_enemy(enemy *e) {
             return true;
         }
     }
+    this->set_blockedEnemy(d);
     return false;
 }
 

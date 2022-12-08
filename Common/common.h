@@ -132,6 +132,12 @@ enum EnemyDirection {
     e_back,
 };// 敌方面朝方向
 
+enum EnemyBuff {
+    Flash,
+    Speed,
+    Powered,
+};
+
 
 struct groundEnemyImage {
     QPixmap enemyleft1_Img;

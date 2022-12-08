@@ -8,6 +8,8 @@
 
 class defender;
 
+class enemyState;
+
 class enemy : public QLabel {
 protected:
 
@@ -30,13 +32,19 @@ protected:
 
     bool isArrive;// 是否到达重点
 
-    vector <enemyState> states;// 敌人的buff状态
-
     int distance;// 某种距离
 
 public:
     Map *my_map;
     EnemyType Type;// 敌人种类
+
+    //----------------------------------------------------
+    // buff栏的专用词条
+    QVector <enemyState*> states;// 敌人的buff状态
+    bool openFlash = false;// 若为true表明开启了flash能力
+    bool flashCooling = false;// 在openFlash = true的情况下若flashCooling为true表明在冷却阶段，闪现能力不会生效
+    defender * flashDen;// flash的敌人
+    //----------------------------------------------------
 
     // 构造函数
     enemy();

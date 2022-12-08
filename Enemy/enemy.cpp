@@ -50,7 +50,7 @@ bool enemy::enterEnd() {
         int length = my_map->allRoads[index].get_len();
         int x_len = my_map->allRoads[index].get_loc(length - 1, 0) * width;
         int y_len = my_map->allRoads[index].get_loc(length - 1, 1) * width;
-        if (Type == Gargoyle) {
+        if (Type == Gargoyle || Type == Raptor) {
             if (x() <= x_len + 30 && x() >= x_len - 30 && y() >= y_len - 30 && y() <= y_len + 30) {
                 set_arrive(true);
                 set_alive(false);

@@ -88,6 +88,9 @@ gargoyle::gargoyle() {
 }
 
 void gargoyle::attack() {
+    if(!get_alive()) {
+        return;
+    }
     defender *d = get_defender();
     if (d && d->statusChecking()) {
         d->beAttacked(get_atk());
@@ -141,7 +144,7 @@ void gargoyle::moveAnimation() {
 }
 
 void gargoyle::attackAnimation() {
-    if(get_alive() && get_defender() != nullptr) {
+    if(get_alive()) {
         QLabel *t = get_defender();
         if (bulletStatu == 0) {
             bullet *b = new bullet(bulletImg);
@@ -154,7 +157,6 @@ void gargoyle::attackAnimation() {
             b->setParent(this->parentWidget());
             b->show();
             b->ballistic(t);
-//            delete b;
             bulletStatu++;
         } else {
             bulletStatu = (bulletStatu + 1) % 10;

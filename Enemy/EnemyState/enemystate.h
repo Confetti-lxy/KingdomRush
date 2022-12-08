@@ -1,10 +1,18 @@
 #ifndef ENEMYSTATE_H
 #define ENEMYSTATE_H
 
+#include "./Common/common.h"
+#include "./Enemy/enemy.h"
 
-class enemyState {
+class enemy;
+
+class enemyState:public QLabel {
+private:
+    enemy* buffEnemy;// 受到增幅的地方单位
+    QPixmap buffImage;// 增幅状态的显示
 public:
-    enemyState();
+    EnemyBuff Type;// buff的类型
+    enemyState(enemy * e, EnemyBuff t);// 构造函数
 };
 
 #endif // ENEMYSTATE_H

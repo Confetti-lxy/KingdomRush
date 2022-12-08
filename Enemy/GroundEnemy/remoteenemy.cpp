@@ -101,6 +101,9 @@ bool remoteenemy::judge_defender(defender *d) {
 }
 
 void remoteenemy::attack() {
+    if(!get_alive()) {
+        return;
+    }
     defender *d = get_defender();
     if (d && d->statusChecking()) {
         d->beAttacked(get_atk());

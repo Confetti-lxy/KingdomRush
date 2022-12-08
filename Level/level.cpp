@@ -1,7 +1,7 @@
 ﻿#include "level.h"
 
 int coins;// 剩余金币
-QVector<bullet*> bullets;
+QVector<bullet*> bullets;// 射出的子弹指针的集合
 
 void level::FriDefenderInit() {
     // soldier单位的初始化以及按钮的设置
@@ -123,16 +123,19 @@ void level::clearCompany() {
 }
 
 void level::putDown() {
+    // soilder单位的再部署
     if (soldierModel->get_IsDep()) {
         AllDefender.append(soldierModel);
         soldierModel = new soldier;
         defenderInit(soldierModel, 950, 20, 930, 20);
     }
+    // guard单位的再部署
     if (guardModel->get_IsDep()) {
         AllDefender.append(guardModel);
         guardModel = new guard;
         defenderInit(guardModel, 950, 170, 930, 170);
     }
+    // dragon单位的再部署
     if (dragonModel->get_IsDep()) {
         AllDefender.append(dragonModel);
         dragonModel = new dragon;
@@ -141,32 +144,30 @@ void level::putDown() {
 }
 
 level::level() {
-
+    // 默认的构造函数，此处不再调用
 }
 
 level::level(int Level) {
     // 基础页面设置
     this->setFixedSize(1050, 630);
     this->setWindowIcon(QPixmap(":/image/Icon.png"));
-
+    //---------------------------------------------------------------------------
     // 加载地图文件参数，构造地图地块的图片素材
     QString file = ":/mapfile/mapfile" + QString::number(Level) + ".txt";
     QString filename = "关卡" + QString::number(Level);
     my_map = new Map(file);
     my_map->update(this);
     this->setWindowTitle(filename);
-
+    //---------------------------------------------------------------------------
     // 3种近战单位, 标签组件, 按钮组件的初始化
     FriDefenderInit(), labelInit(), buttonInit();
-
     // 结束初始等待时间后敌人开始出动
     timer0 = new QTimer(this);
     timer1 = new QTimer(this);
     timer2 = new QTimer(this);
     timer0->start(100);
     connect(timer0, &QTimer::timeout, this, &level::makeWar);
-
-//     远程部署地块的图层绘制
+    // 远程部署地块的图层绘制
     for (auto remoteSell: my_map->allRemotes) {
         int i = 1;
         for (auto buildSell: remoteSell->architectures) {
@@ -180,6 +181,8 @@ level::level(int Level) {
                 } else {
                     t = new mercenaryTower;
                 }
+                //-----------------------------------------
+                // 防御塔单位的部署
                 t->set_map(my_map);
                 if (coins >= t->get_cost()) {
                     t->setParent(this);
@@ -193,6 +196,7 @@ level::level(int Level) {
                 } else {
                     remoteSell->PressEvent(-1, -1);
                 }
+                //-----------------------------------------
             });
             i++;
         }
@@ -200,16 +204,16 @@ level::level(int Level) {
 }
 
 void level::gameStart() {
+    // 游戏开始
     timer1->start(1000);
-    connect(timer1, &QTimer::timeout, [=]() {
-        coins += 10;
-    });
+    connect(timer1, &QTimer::timeout, [=]() { coins += 10; });
     EnemyDistribution(10, 5, 5, 5);
 }
 
 void level::makeWar() {
     labels.moneyNum->setText(QString::number(coins));
     labels.lifeNum->setText(QString::number(existLife));
+    //---------------------------------------------------
     // 游戏结束的结算
     if (isWin || (existLife <= 0 && !isOver)) {
         clearCompany();
@@ -239,10 +243,13 @@ void level::makeWar() {
             });
         }
     }
-
+    //---------------------------------------------------
     // 再部署
     putDown();
     int deadNum = 0;
+    //---------------------------------------------------
+    // 敌我单位的动作，包括移动，攻击，死亡退场
+    // 敌方单位的攻击
     for (auto enemy: AllEnemy) {
         if (!enemy->statusChecking()) {
             deadNum++;
@@ -259,10 +266,6 @@ void level::makeWar() {
                 break;
             }
         }
-    }
-    // 判断游戏胜利
-    if (deadNum == enemyNum) {
-        isWin = true;
     }
     // 友方单位的攻击
     for (auto defender: AllDefender) {
@@ -293,9 +296,15 @@ void level::makeWar() {
             }
         }
     }
+    //---------------------------------------------------
+    // 判断游戏胜利
+    if (deadNum == enemyNum) {
+        isWin = true;
+    }
 }
 
 void level::restart() {
+    // 游戏重新开始，将所有参数调整至初始状态
     isDoubleSpeed = false, isOver = false, isWin = false;
     enemyNum = 100, coins = 500, existLife = 10;
     for (int i = 0; i < my_map->allRemotes.size(); i++) {
@@ -313,14 +322,16 @@ void level::restart() {
 }
 
 void level::EnemyDistribution(int num1, int num2, int num3, int num4) {
-    int groundNum = 0, sleepTime;
-    enemyNum = num1 + num3 + num4;
+    int groundNum = 1, sleepTime;
+    enemyNum = num1 + num2 + num3 + num4;
     for (auto road: my_map->allRoads) {
         if (road.get_type() == ground_road) {
             groundNum++;
         }
     }
     timer2->start(100);
+    //-----------------------------------------------------------------------------
+    // 4种敌方单位的出兵
     for (int i = 0; i < num1; i++) {
         enemy *barbarianModel = new barbarian;
         barbarianModel->show();
@@ -330,6 +341,22 @@ void level::EnemyDistribution(int num1, int num2, int num3, int num4) {
         barbarianModel->setParent(this);
         int roadIdx = i % groundNum;
         barbarianModel->set_index(roadIdx);
+        //--------------------------------------------------------
+        // 添加标签
+        if(i % 5 == 0) {
+            enemyState * e;
+            if((i / 5) % 3 == 0) {
+                e= new enemyState(barbarianModel, Flash);
+            }
+            else if((i / 5) % 3 == 1) {
+                e = new enemyState(barbarianModel, Powered);
+            }
+            else {
+                e = new enemyState(barbarianModel, Flash);
+            }
+            barbarianModel->states.append(e);
+        }
+        //--------------------------------------------------------
         connect(timer2, &QTimer::timeout, [=]() {
             barbarianModel->add_dis(barbarianModel->get_speed());
             barbarianModel->enemyMove(roadIdx, barbarianModel->get_dis());
@@ -347,6 +374,22 @@ void level::EnemyDistribution(int num1, int num2, int num3, int num4) {
         remoteenemyModel->setParent(this);
         int roadIdx = i % groundNum;
         remoteenemyModel->set_index(roadIdx);
+        //--------------------------------------------------------
+        // 添加标签
+        if(i % 5 == 0) {
+            enemyState * e   ;
+            if((i / 5) % 3 == 0) {
+                e= new enemyState(remoteenemyModel, Speed);
+            }
+            else if((i / 5) % 3 == 1) {
+                e = new enemyState(remoteenemyModel, Powered);
+            }
+            else {
+                e = new enemyState(remoteenemyModel, Flash);
+            }
+            remoteenemyModel->states.append(e);
+        }
+        //--------------------------------------------------------
         connect(timer2, &QTimer::timeout, [=]() {
             remoteenemyModel->add_dis(remoteenemyModel->get_speed());
             remoteenemyModel->enemyMove(roadIdx, remoteenemyModel->get_dis());
@@ -364,6 +407,19 @@ void level::EnemyDistribution(int num1, int num2, int num3, int num4) {
         gargoyleModel->setParent(this);
         int roadIdx = i % groundNum;
         gargoyleModel->set_index(roadIdx);
+        //--------------------------------------------------------
+        // 添加标签
+        if(i % 5 == 0) {
+            enemyState * e;
+            if((i / 5) % 2 == 0) {
+                e= new enemyState(gargoyleModel, Speed);
+            }
+            else {
+                e = new enemyState(gargoyleModel, Powered);
+            }
+            gargoyleModel->states.append(e);
+        }
+        //--------------------------------------------------------
         connect(timer2, &QTimer::timeout, [=]() {
             gargoyleModel->add_dis(gargoyleModel->get_speed());
             gargoyleModel->enemyMove(roadIdx, gargoyleModel->get_dis());
@@ -372,6 +428,37 @@ void level::EnemyDistribution(int num1, int num2, int num3, int num4) {
         });
         Sleep(sleepTime);
     }
+    for (int i = 0; i < num4; i++) {
+        enemy *raptorModel = new raptor;
+        raptorModel->show();
+        raptorModel->my_map = this->my_map;
+        AllEnemy.append(raptorModel);
+        sleepTime = (2000.0) / groundNum;
+        raptorModel->setParent(this);
+        int roadIdx = i % groundNum;
+        raptorModel->set_index(roadIdx);
+        //--------------------------------------------------------
+        // 添加标签
+        if(i % 5 == 0) {
+            enemyState * e;
+            if((i / 5) % 2 == 0) {
+                e= new enemyState(raptorModel, Speed);
+            }
+            else {
+                e = new enemyState(raptorModel, Powered);
+            }
+            raptorModel->states.append(e);
+        }
+        //--------------------------------------------------------
+        connect(timer2, &QTimer::timeout, [=]() {
+            raptorModel->add_dis(raptorModel->get_speed());
+            raptorModel->enemyMove(roadIdx, raptorModel->get_dis());
+            if (raptorModel->statusChecking())
+                raptorModel->show();
+        });
+        Sleep(sleepTime);
+    }
+    //-----------------------------------------------------------------------------
 }
 
 void level::Sleep(int sec) {
@@ -381,16 +468,20 @@ void level::Sleep(int sec) {
 }
 
 void level::mousePressEvent(QMouseEvent *event) {
+    // 点击部署
     for (auto remoteCell: my_map->allRemotes) {
-        remoteCell->PressEvent(event->x(), event->y());
+        remoteCell->PressEvent(event->pos().x(), event->pos().y());
     }
+    // 点击显示塔的攻击范围
     for (auto t: AllTower) {
-        t->show_rng(event->x(), event->y());
+        t->show_rng(event->pos().x(), event->pos().y());
     }
-    if (!isDoubleSpeed && event->x() >= labels.oneSpeed->x()
-        && event->x() <= labels.oneSpeed->x() + labels.oneSpeed->width()
-        && event->y() >= labels.oneSpeed->y()
-        && event->y() <= labels.oneSpeed->y() + labels.oneSpeed->height()) {
+    //------------------------------------------------------------------------------
+    // 点击切换一倍速和二倍速
+    if (!isDoubleSpeed && event->pos().x() >= labels.oneSpeed->x()
+        && event->pos().x() <= labels.oneSpeed->x() + labels.oneSpeed->width()
+        && event->pos().y() >= labels.oneSpeed->y()
+        && event->pos().y() <= labels.oneSpeed->y() + labels.oneSpeed->height()) {
         isDoubleSpeed = true;
         labels.oneSpeed->hide();
         labels.doubleSpeed->show();
@@ -399,10 +490,10 @@ void level::mousePressEvent(QMouseEvent *event) {
         timer0->setInterval(100);
         return;
     }
-    if (isDoubleSpeed && event->x() >= labels.doubleSpeed->x()
-        && event->x() <= labels.doubleSpeed->x() + labels.doubleSpeed->width()
-        && event->y() >= labels.doubleSpeed->y()
-        && event->y() <= labels.doubleSpeed->y() + labels.doubleSpeed->height()) {
+    if (isDoubleSpeed && event->pos().x() >= labels.doubleSpeed->x()
+        && event->pos().x() <= labels.doubleSpeed->x() + labels.doubleSpeed->width()
+        && event->pos().y() >= labels.doubleSpeed->y()
+        && event->pos().y() <= labels.doubleSpeed->y() + labels.doubleSpeed->height()) {
         isDoubleSpeed = false;
         labels.doubleSpeed->hide();
         labels.oneSpeed->show();
@@ -411,54 +502,5 @@ void level::mousePressEvent(QMouseEvent *event) {
         timer0->setInterval(200);
         return;
     }
+    //------------------------------------------------------------------------------
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

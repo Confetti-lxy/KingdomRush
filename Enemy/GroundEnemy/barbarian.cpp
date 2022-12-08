@@ -72,29 +72,30 @@ void barbarian::attackAnimation() {
 }
 
 void barbarian::moveAnimation() {
-    if (get_alive()) {
-        if (get_direction() == e_left) {
-            if (get_img1()) {
-                setPixmap(enemyImage.enemyleft2_Img);
-                resize(QSize(enemyImage.enemyleft2_Img.width(), enemyImage.enemyleft2_Img.height()));
-                set_img1(false);
-            } else {
-                setPixmap(enemyImage.enemyleft1_Img);
-                resize(QSize(enemyImage.enemyleft1_Img.width(), enemyImage.enemyleft1_Img.height()));
-                set_img1(true);
-            }
-            return;
+    if (!get_alive()) {
+        return ;
+    }
+    if (get_direction() == e_left) {
+        if (get_img1()) {
+            setPixmap(enemyImage.enemyleft2_Img);
+            resize(QSize(enemyImage.enemyleft2_Img.width(), enemyImage.enemyleft2_Img.height()));
+            set_img1(false);
+        } else {
+            setPixmap(enemyImage.enemyleft1_Img);
+            resize(QSize(enemyImage.enemyleft1_Img.width(), enemyImage.enemyleft1_Img.height()));
+            set_img1(true);
         }
-        if (get_direction() == e_right) {
-            if (get_img1()) {
-                setPixmap(enemyImage.enemyright2_Img);
-                resize(QSize(enemyImage.enemyright2_Img.width(), enemyImage.enemyright2_Img.height()));
-                set_img1(false);
-            } else {
-                setPixmap(enemyImage.enemyright1_Img);
-                resize(QSize(enemyImage.enemyright1_Img.width(), enemyImage.enemyright1_Img.height()));
-                set_img1(true);
-            }
+        return;
+    }
+    if (get_direction() == e_right) {
+        if (get_img1()) {
+            setPixmap(enemyImage.enemyright2_Img);
+            resize(QSize(enemyImage.enemyright2_Img.width(), enemyImage.enemyright2_Img.height()));
+            set_img1(false);
+        } else {
+            setPixmap(enemyImage.enemyright1_Img);
+            resize(QSize(enemyImage.enemyright1_Img.width(), enemyImage.enemyright1_Img.height()));
+            set_img1(true);
         }
     }
 }
