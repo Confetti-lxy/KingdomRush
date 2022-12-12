@@ -8,7 +8,7 @@ class enemy;
 
 class enemyState:public QLabel {
 private:
-    enemy* buffEnemy;// 受到增幅的地方单位
+    enemy* buffEnemy;// 受到增幅的敌方单位
     QPixmap buffImage;// 增幅状态的显示
 public:
     EnemyBuff Type;// buff的类型

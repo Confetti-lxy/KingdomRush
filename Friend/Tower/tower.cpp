@@ -1,6 +1,5 @@
 #include "tower.h"
 
-
 tower::tower() {
     my_range = new range;
     my_range->hide();
@@ -11,6 +10,15 @@ tower::tower() {
 
 void tower::attack() {
     target_enemy->beAttatked(get_atk());
+    if(openBleeding) {
+        target_enemy->bleeded = true;
+        atkCount++;
+        if(atkCount == 100) {
+            atkCount = 0;
+            openBleeding = false;
+            deleteState(states, Bleeding);
+        }
+    }
 }
 
 void tower::beAttacked(int atk) {
@@ -22,6 +30,11 @@ bool tower::statusChecking() {
     if (existLife > 0) {
         return true;
     } else {
+        for(auto s:states) {
+            if(s->Type == Bleeding) {
+
+            }
+        }
         this->hide();
         this->my_build->setState(true);
         return false;

@@ -5,6 +5,9 @@
 #include "./Common/Blood/blood.h"
 #include "./Enemy/enemy.h"
 #include "./Friend/Tower/range.h"
+#include "./towerstate.h"
+
+class towerState;
 
 class tower : public QLabel {
 protected:
@@ -28,6 +31,14 @@ public:
     Map *my_map;
     QPixmap TowerImage;// 图片素材
     range *my_range;// 攻击范围圈
+
+    //-------------------------------------------
+    // buff栏专用词条
+    QVector<towerState*> states;// 防御塔的buff状态
+    bool openBleeding = false;// 判断是否开启流血模式
+    int atkCount;// 攻击计数
+    //-------------------------------------------
+
 
     tower();// 构造函数
 

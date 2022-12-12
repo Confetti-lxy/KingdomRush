@@ -90,24 +90,13 @@ using namespace std;
     animation->setEasingCurve(QEasingCurve::OutBounce);\
     animation->start();
 
-
-// 用于词条效果结束后进行删除
 #define deleteState(s, type)\
     for(auto it = s.begin();it!=s.end();it++) {\
         if((*it)->Type == type) {\
             states.erase(it);\
-            if(it == s.end()) break;\
+            if(it == e.end()) break;\
         }\
     }\
-
-// 用于文字QLabel的加载
-#define draw(img,x,y)\
-    img = new QLabel;\
-    img ->setParent(this);\
-    img ->move(x, y);\
-    img ->setFixedSize(pix.width(), pix.height());\
-    img ->setBaseSize(QSize(pix.width(), pix.height()));\
-    img ->raise();
 
 
 enum direction_type {
@@ -221,10 +210,6 @@ struct levelLabel {
     QLabel *failureInterface;// 失败界面
     QLabel *oneSpeed;// 一倍速的标签
     QLabel *doubleSpeed;// 两倍速的标签
-    QLabel *berserk;//显示是否存有berserk词条
-    QLabel *glacial;//显示是否存有glacial词条
-    QLabel *massInjured;//显示是否存有massInjured词条
-    QLabel *bleeding;//显示是否存有bleeding词条
 };// level里面的标签组件
 
 struct levelButton {

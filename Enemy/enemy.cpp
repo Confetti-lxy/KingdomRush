@@ -32,6 +32,17 @@ bool enemy::statusChecking() {
         life->hide();
         return false;
     } else {
+        for(auto s : states) {
+            if(s->Type == Speed) {
+                this->life->color.setNamedColor("blue");
+            }
+            else if(s->Type == Flash) {
+                this->life->color.setNamedColor("yellow");
+            }
+            else {
+                this->life->color.setNamedColor("black");
+            }
+        }
         life->set_len((70.0 * existLife) / allLife);
         life->raise();
         return true;

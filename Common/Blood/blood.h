@@ -8,7 +8,9 @@ class blood : public QLabel {
 private:
     int len = 70;// 总长度
     int t = 0;//
+
 public:
+    QColor color;
     blood();// 构造函数
     void paintEvent(QPaintEvent *);
 

@@ -5,8 +5,11 @@
 #include "Common/Button/deploy.h"
 #include "Common/Blood/blood.h"
 #include "Enemy/enemy.h"
+#include "./defenderstate.h"
 
 class enemy;
+
+class defenderState;
 
 class defender : public QLabel {
 private:
@@ -35,6 +38,15 @@ public:
 
     int defender_x_loc, defender_y_loc;//defender的坐标
     int relative_x, relative_y;//格子坐标
+
+    //-------------------------------------------
+    // buff栏专用词条
+    QVector<defenderState*> states;// 防御塔的buff状态
+    bool openGlacial = false;// 判断是否开启冰冻模式
+    bool openMassInjured = false;// 判断是是否开启群伤模式
+    int glacialCount = 0;// 冰冻攻击计数
+    int massInjuredCount = 0;// 群攻攻击计数
+    //-------------------------------------------
 
 
     // 构造函数

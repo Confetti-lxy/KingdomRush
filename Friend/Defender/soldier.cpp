@@ -81,7 +81,38 @@ void soldier::attack() {
         }
         // 若存在被阻挡的敌人，则优先攻击先被阻挡的敌人
         if (!e.empty()) {
-            e[0]->beAttatked(get_atk());
+            if(this->openMassInjured) {
+                e[0]->beAttatked(get_atk());
+                if(this->openGlacial) {
+                    e[0]->beFrozen = true;
+                    glacialCount++;
+                    if(glacialCount == 20) {
+                        openGlacial = 0;
+                        openGlacial = false;
+                        deleteState(states, Glacial)
+                    }
+                }
+                massInjuredCount++;
+                if(massInjuredCount == 10) {
+                    massInjuredCount = 0;
+                    openMassInjured = false;
+                    deleteState(states, MassInjured)
+                }
+            }
+            else {
+                for(auto enemy:e) {
+                    enemy->beAttatked(get_atk());
+                    if(this->openGlacial) {
+                        enemy->beFrozen = true;
+                        glacialCount++;
+                        if(glacialCount == 20) {
+                            openGlacial = 0;
+                            openGlacial = false;
+                            deleteState(states, Glacial)
+                        }
+                    }
+                }
+            }
             attackAnimation(e[0]);
         }
             // 否则则变为初始的未攻击的状态

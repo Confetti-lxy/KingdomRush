@@ -44,6 +44,11 @@ public:
     bool openFlash = false;// 若为true表明开启了flash能力
     bool flashCooling = false;// 在openFlash = true的情况下若flashCooling为true表明在冷却阶段，闪现能力不会生效
     defender * flashDen;// flash的敌人
+    bool bleeded = false;// 判断是否在流血状态
+    int bleedCount = 0;// 用于记录已经流血的次数
+    bool beFrozen = false;// 判断是否被冰住
+    int frozenCount = 0;// 用于记录冰冻的次数（时间）
+    bool count1 = false, count2=false, count3=false;// 用于记录死亡后是否掉落词条
     //----------------------------------------------------
 
     // 构造函数

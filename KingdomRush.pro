@@ -25,6 +25,7 @@ SOURCES += \
     Enemy/GroundEnemy/remoteenemy.cpp \
     Enemy/enemy.cpp \
     Friend/Defender/defender.cpp \
+    Friend/Defender/defenderstate.cpp \
     Friend/Defender/dragon.cpp \
     Friend/Defender/guard.cpp \
     Friend/Defender/soldier.cpp \
@@ -33,6 +34,7 @@ SOURCES += \
     Friend/Tower/mercenarytower.cpp \
     Friend/Tower/range.cpp \
     Friend/Tower/tower.cpp \
+    Friend/Tower/towerstate.cpp \
     Level/level.cpp \
     Map/map.cpp \
     Map/road.cpp \
@@ -57,6 +59,7 @@ HEADERS += \
     Enemy/GroundEnemy/remoteenemy.h \
     Enemy/enemy.h \
     Friend/Defender/defender.h \
+    Friend/Defender/defenderstate.h \
     Friend/Defender/dragon.h \
     Friend/Defender/guard.h \
     Friend/Defender/soldier.h \
@@ -66,6 +69,7 @@ HEADERS += \
     Friend/Tower/mercenarytower.h \
     Friend/Tower/range.h \
     Friend/Tower/tower.h \
+    Friend/Tower/towerstate.h \
     Level/level.h \
     Map/map.h \
     Map/road.h \

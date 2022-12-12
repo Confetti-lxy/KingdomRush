@@ -27,6 +27,8 @@ private:
 
     int enemyNum = 100;// 敌人数量
 
+    bool s1 = false, s2 = false, s3 = false, s4 = true;// 用于记录友方单位的buff
+
     void FriDefenderInit();// 3个友方defender单位的初始化
     void labelInit();// 标签组件的初始化
     void buttonInit();// 按钮组件的初始化

@@ -16,11 +16,22 @@ defender::defender() {
 bool defender::statusChecking() {
     //---------------------------------------------------
     // 防止dragon单位出现莫名奇妙的位移
-    if (get_alive() && x() < 0) {
+    if (Type == Dragon && get_alive() && x() < 0) {
         move(x() + 4623, y());
     }
     //---------------------------------------------------
     if (existLife > 0 && isAlive) {
+        if(states.size() == 1) {
+            if(states[0]->Type == Berserk) {
+                this->life->color.setNamedColor("black");
+            }
+            else if(states[0]->Type == Glacial) {
+                this->life->color.setNamedColor("blue");
+            }
+            else {
+                this->life->color.setNamedColor("green");
+            }
+        }
         life->set_len(70.0 * existLife / allLife);
         return true;
     } else {

@@ -6,15 +6,15 @@ QVector<bullet*> bullets;// 射出的子弹指针的集合
 void level::FriDefenderInit() {
     // soldier单位的初始化以及按钮的设置
     soldierModel = new soldier;
-    defenderInit(soldierModel, 950, 20, 930, 20);
+    defenderInit(soldierModel, 950, 0, 930, 0);
 
     // guard单位的初始化以及按钮的设置
     guardModel = new guard;
-    defenderInit(guardModel, 950, 170, 930, 170);
+    defenderInit(guardModel, 950, 120, 930, 120);
 
     // dragon单位的初始化以及按钮的设置
     dragonModel = new dragon;
-    defenderInit(dragonModel, 880, 320, 930, 320);
+    defenderInit(dragonModel, 880, 240, 930, 240);
 }
 
 void level::labelInit() {
@@ -59,6 +59,13 @@ void level::labelInit() {
     labels.lifeNum->setBaseSize(QSize(pix.width(), pix.height()));
     labels.lifeNum->raise();
 
+    // 增益词条的加载
+    draw(labels.berserk,950,360);
+    draw(labels.glacial,950,380);
+    draw(labels.massInjured,950,400);
+    draw(labels.bleeding,950,420);
+
+
     // 胜利图片的加载
     pix.load(":/image/win.png");
     labels.victoryInterface = new QLabel;
@@ -74,6 +81,8 @@ void level::labelInit() {
     labels.failureInterface->setGeometry(0, 0, pix.width(), pix.height());
     labels.failureInterface->setPixmap(pix);
     labels.failureInterface->move(0.5 * (this->width() - pix.width()), -pix.height());
+
+
 }
 
 void level::buttonInit() {
@@ -127,19 +136,67 @@ void level::putDown() {
     if (soldierModel->get_IsDep()) {
         AllDefender.append(soldierModel);
         soldierModel = new soldier;
-        defenderInit(soldierModel, 950, 20, 930, 20);
+        defenderInit(soldierModel, 950, 0, 930, 0);
+        if(this->s1) {
+            defenderState* d = new defenderState(soldierModel, Berserk);
+            soldierModel->states.append(d);
+            this->s1 = false;
+        }
+        else if(this->s2) {
+            defenderState* d = new defenderState(soldierModel, Glacial);
+            soldierModel->states.append(d);
+            this->s2 = false;
+        }
+        else {
+            defenderState* d = new defenderState(soldierModel, MassInjured);
+            soldierModel->states.append(d);
+            this->s3 = false;
+        }
+        soldierModel->statusChecking();
     }
     // guard单位的再部署
     if (guardModel->get_IsDep()) {
         AllDefender.append(guardModel);
         guardModel = new guard;
-        defenderInit(guardModel, 950, 170, 930, 170);
+        defenderInit(guardModel, 950, 120, 930, 120);
+        if(this->s1) {
+            defenderState* d = new defenderState(soldierModel, Berserk);
+            soldierModel->states.append(d);
+            this->s1 = false;
+        }
+        else if(this->s2) {
+            defenderState* d = new defenderState(soldierModel, Glacial);
+            soldierModel->states.append(d);
+            this->s2 = false;
+        }
+        else {
+            defenderState* d = new defenderState(soldierModel, MassInjured);
+            soldierModel->states.append(d);
+            this->s3 = false;
+        }
+        soldierModel->statusChecking();
     }
     // dragon单位的再部署
     if (dragonModel->get_IsDep()) {
         AllDefender.append(dragonModel);
         dragonModel = new dragon;
-        defenderInit(dragonModel, 880, 320, 930, 320);
+        defenderInit(dragonModel, 880, 240, 930, 240);
+        if(this->s1) {
+            defenderState* d = new defenderState(soldierModel, Berserk);
+            soldierModel->states.append(d);
+            this->s1 = false;
+        }
+        else if(this->s2) {
+            defenderState* d = new defenderState(soldierModel, Glacial);
+            soldierModel->states.append(d);
+            this->s2 = false;
+        }
+        else {
+            defenderState* d = new defenderState(soldierModel, MassInjured);
+            soldierModel->states.append(d);
+            this->s3 = false;
+        }
+        soldierModel->statusChecking();
     }
 }
 
@@ -181,6 +238,11 @@ level::level(int Level) {
                 } else {
                     t = new mercenaryTower;
                 }
+                if(this->s4) {
+                    towerState* b = new towerState(t, Bleeding);
+                    t->states.append(b);
+                    this->s4 = false;
+                }
                 //-----------------------------------------
                 // 防御塔单位的部署
                 t->set_map(my_map);
@@ -213,6 +275,31 @@ void level::gameStart() {
 void level::makeWar() {
     labels.moneyNum->setText(QString::number(coins));
     labels.lifeNum->setText(QString::number(existLife));
+    if(this->s1) {
+        labels.berserk->setText("berserk");
+    }
+    else {
+        labels.berserk->setText("");
+    }
+    if(this->s2) {
+        labels.glacial->setText("glacial");
+    }
+    else {
+        labels.glacial->setText("");
+    }
+    if(this->s3) {
+        labels.massInjured->setText("massInjured");
+    }
+    else {
+        labels.massInjured->setText("");
+    }
+    if(this->s4) {
+        labels.bleeding->setText("bleeding");
+    }
+    else {
+        labels.bleeding->setText("");
+    }
+
     //---------------------------------------------------
     // 游戏结束的结算
     if (isWin || (existLife <= 0 && !isOver)) {
@@ -253,6 +340,23 @@ void level::makeWar() {
     for (auto enemy: AllEnemy) {
         if (!enemy->statusChecking()) {
             deadNum++;
+            if(enemy->count1||enemy->count2||enemy->count3) {
+                if(enemy->count1) {
+                    this->s1 = true;
+                    enemy->count1  = false;
+                }
+                else if(enemy->count2) {
+                    this->s2 = true;
+                    enemy->count2 = false;
+                }
+                else {
+                    this->s3 = true;
+                    enemy->count3 = false;
+                }
+                if(deadNum % 2 == 0 ) {
+                    this->s4 = true;
+                }
+            }
             enemy->hide();
         } else {
             enemy->moveAnimation();
@@ -346,7 +450,7 @@ void level::EnemyDistribution(int num1, int num2, int num3, int num4) {
         if(i % 5 == 0) {
             enemyState * e;
             if((i / 5) % 3 == 0) {
-                e= new enemyState(barbarianModel, Flash);
+                e= new enemyState(barbarianModel, Speed);
             }
             else if((i / 5) % 3 == 1) {
                 e = new enemyState(barbarianModel, Powered);
@@ -358,7 +462,12 @@ void level::EnemyDistribution(int num1, int num2, int num3, int num4) {
         }
         //--------------------------------------------------------
         connect(timer2, &QTimer::timeout, [=]() {
-            barbarianModel->add_dis(barbarianModel->get_speed());
+            if(!barbarianModel->beFrozen) {
+                barbarianModel->add_dis(barbarianModel->get_speed());
+            }
+            if(isDoubleSpeed) {
+                barbarianModel->add_dis(barbarianModel->get_speed());
+            }
             barbarianModel->enemyMove(roadIdx, barbarianModel->get_dis());
             if (barbarianModel->statusChecking())
                 barbarianModel->show();
@@ -391,7 +500,12 @@ void level::EnemyDistribution(int num1, int num2, int num3, int num4) {
         }
         //--------------------------------------------------------
         connect(timer2, &QTimer::timeout, [=]() {
-            remoteenemyModel->add_dis(remoteenemyModel->get_speed());
+            if(!remoteenemyModel->beFrozen) {
+                remoteenemyModel->add_dis(remoteenemyModel->get_speed());
+            }
+            if(isDoubleSpeed) {
+                remoteenemyModel->add_dis(remoteenemyModel->get_speed());
+            }
             remoteenemyModel->enemyMove(roadIdx, remoteenemyModel->get_dis());
             if (remoteenemyModel->statusChecking())
                 remoteenemyModel->show();
@@ -421,7 +535,12 @@ void level::EnemyDistribution(int num1, int num2, int num3, int num4) {
         }
         //--------------------------------------------------------
         connect(timer2, &QTimer::timeout, [=]() {
-            gargoyleModel->add_dis(gargoyleModel->get_speed());
+            if(!gargoyleModel->beFrozen) {
+                gargoyleModel->add_dis(gargoyleModel->get_speed());
+            }
+            if(isDoubleSpeed) {
+                gargoyleModel->add_dis(gargoyleModel->get_speed());
+            }
             gargoyleModel->enemyMove(roadIdx, gargoyleModel->get_dis());
             if (gargoyleModel->statusChecking())
                 gargoyleModel->show();
@@ -451,7 +570,12 @@ void level::EnemyDistribution(int num1, int num2, int num3, int num4) {
         }
         //--------------------------------------------------------
         connect(timer2, &QTimer::timeout, [=]() {
-            raptorModel->add_dis(raptorModel->get_speed());
+            if(!raptorModel->beFrozen) {
+                raptorModel->add_dis(raptorModel->get_speed());
+            }
+            if(isDoubleSpeed) {
+                raptorModel->add_dis(raptorModel->get_speed());
+            }
             raptorModel->enemyMove(roadIdx, raptorModel->get_dis());
             if (raptorModel->statusChecking())
                 raptorModel->show();
