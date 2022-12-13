@@ -108,8 +108,7 @@ void Map::update(QWidget *page) {
             }
             label->setStyleSheet("QPushButton{border:Opx;}");
             label->setFixedSize(width, width);
-            label->setParent(page);
-            label->move(i * width, j * width);
+            label->setParent(page), label->move(i * width, j * width);
             label->show();
         }
     }

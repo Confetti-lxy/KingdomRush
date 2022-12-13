@@ -12,26 +12,20 @@ ticket::ticket(QString routineImg, QString activationImg) {
     show();
 }
 
-
-void ticket::zoomUp() {
+void ticket::zoom() {
     QPropertyAnimation *newAnimation = new QPropertyAnimation(this, "geometry");
     newAnimation->setDuration(500);
     newAnimation->setStartValue(QRect(this->x(), this->y() + 20, this->width(), this->height()));
     newAnimation->setEndValue(QRect(this->x(), this->y(), this->width(), this->height()));
     newAnimation->setEasingCurve(QEasingCurve::InOutBounce);
     newAnimation->start();
-}
-
-void ticket::zoomDown() {
-    QPropertyAnimation *newAnimation = new QPropertyAnimation(this, "geometry");
+    newAnimation = new QPropertyAnimation(this, "geometry");
     newAnimation->setDuration(500);
     newAnimation->setStartValue(QRect(this->x(), this->y(), this->width(), this->height()));
     newAnimation->setEndValue(QRect(this->x(), this->y() + 20, this->width(), this->height()));
     newAnimation->setEasingCurve(QEasingCurve::InOutBounce);
     newAnimation->start();
 }
-
-
 void ticket::press(QMouseEvent *event) {
     if (activationImg != "") {
         if (!specialImg.load(activationImg)) {

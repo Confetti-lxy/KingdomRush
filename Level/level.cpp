@@ -177,18 +177,15 @@ void level::putDown() {
         defenderInit(dragonModel, 880, 240, 930, 240);
         if(this->s1) {
             defenderState* d = new defenderState(soldierModel, Berserk);
-            soldierModel->states.append(d);
-            this->s1 = false;
+            soldierModel->states.append(d), this->s1 = false;
         }
         else if(this->s2) {
             defenderState* d = new defenderState(soldierModel, Glacial);
-            soldierModel->states.append(d);
-            this->s2 = false;
+            soldierModel->states.append(d), this->s2 = false;
         }
         else {
             defenderState* d = new defenderState(soldierModel, MassInjured);
-            soldierModel->states.append(d);
-            this->s3 = false;
+            soldierModel->states.append(d), this->s3 = false;
         }
         soldierModel->statusChecking();
     }
@@ -206,16 +203,13 @@ level::level(int Level) {
     // 加载地图文件参数，构造地图地块的图片素材
     QString file = ":/mapfile/mapfile" + QString::number(Level) + ".txt";
     QString filename = "关卡" + QString::number(Level);
-    my_map = new Map(file);
-    my_map->update(this);
+    my_map = new Map(file), my_map->update(this);
     this->setWindowTitle(filename);
     //---------------------------------------------------------------------------
     // 3种近战单位, 标签组件, 按钮组件的初始化
     FriDefenderInit(), labelInit(), buttonInit();
     // 结束初始等待时间后敌人开始出动
-    timer0 = new QTimer(this);
-    timer1 = new QTimer(this);
-    timer2 = new QTimer(this);
+    timer0 = new QTimer(this), timer1 = new QTimer(this), timer2 = new QTimer(this);
     timer0->start(100);
     connect(timer0, &QTimer::timeout, this, &level::makeWar);
     // 远程部署地块的图层绘制
@@ -234,19 +228,15 @@ level::level(int Level) {
                 }
                 if(this->s4) {
                     towerState* b = new towerState(t, Bleeding);
-                    t->states.append(b);
-                    this->s4 = false;
+                    t->states.append(b), this->s4 = false;
                 }
                 //-----------------------------------------
                 // 防御塔单位的部署
                 t->set_map(my_map);
                 if (coins >= t->get_cost()) {
-                    t->setParent(this);
-                    t->set_build(remoteSell);
+                    t->setParent(this), t->set_build(remoteSell);
                     t->move(remoteSell->x(), remoteSell->y());
-                    AllTower.append(t);
-                    t->show();
-                    coins -= t->get_cost();
+                    AllTower.append(t), t->show(), coins -= t->get_cost();
                     remoteSell->PressEvent(-1, -1);
                     remoteSell->setState(false);
                 } else {
@@ -306,8 +296,7 @@ void level::makeWar() {
                 buttons.back->move(560, labels.victoryInterface->y() + 448);
                 buttons.back->show();
                 buttons.reopen->move(440, labels.victoryInterface->y() + 448);
-                buttons.reopen->show();
-                buttons.back->raise();
+                buttons.reopen->show(), buttons.back->raise();
                 buttons.reopen->raise();
             });
         } else {
@@ -318,8 +307,7 @@ void level::makeWar() {
                 buttons.back->move(550, labels.failureInterface->y() + 407);
                 buttons.back->show();
                 buttons.reopen->move(430, labels.failureInterface->y() + 407);
-                buttons.reopen->show();
-                buttons.back->raise();
+                buttons.reopen->show(), buttons.back->raise();
                 buttons.reopen->raise();
             });
         }
@@ -336,16 +324,13 @@ void level::makeWar() {
             deadNum++;
             if(enemy->count1||enemy->count2||enemy->count3) {
                 if(enemy->count1) {
-                    this->s1 = true;
-                    enemy->count1  = false;
+                    this->s1 = true, enemy->count1  = false;
                 }
                 else if(enemy->count2) {
-                    this->s2 = true;
-                    enemy->count2 = false;
+                    this->s2 = true, enemy->count2 = false;
                 }
                 else {
-                    this->s3 = true;
-                    enemy->count3 = false;
+                    this->s3 = true, enemy->count3 = false;
                 }
                 if(deadNum % 2 == 0 ) {
                     this->s4 = true;
@@ -601,11 +586,8 @@ void level::mousePressEvent(QMouseEvent *event) {
         && event->pos().y() >= labels.oneSpeed->y()
         && event->pos().y() <= labels.oneSpeed->y() + labels.oneSpeed->height()) {
         isDoubleSpeed = true;
-        labels.oneSpeed->hide();
-        labels.doubleSpeed->show();
-        timer2->setInterval(100);
-        timer1->setInterval(100);
-        timer0->setInterval(100);
+        labels.oneSpeed->hide(), labels.doubleSpeed->show();
+        timer0->setInterval(100), timer1->setInterval(100), timer2->setInterval(100);
         return;
     }
     if (isDoubleSpeed && event->pos().x() >= labels.doubleSpeed->x()
@@ -613,11 +595,8 @@ void level::mousePressEvent(QMouseEvent *event) {
         && event->pos().y() >= labels.doubleSpeed->y()
         && event->pos().y() <= labels.doubleSpeed->y() + labels.doubleSpeed->height()) {
         isDoubleSpeed = false;
-        labels.doubleSpeed->hide();
-        labels.oneSpeed->show();
-        timer2->setInterval(200);
-        timer1->setInterval(200);
-        timer0->setInterval(200);
+        labels.doubleSpeed->hide(), labels.oneSpeed->show();
+        timer0->setInterval(200), timer1->setInterval(200), timer2->setInterval(200);
         return;
     }
     //------------------------------------------------------------------------------

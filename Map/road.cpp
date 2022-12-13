@@ -22,12 +22,10 @@ int road::transToLoc(int step, int &x, int &y) const {
         ans = direction(i);
         if (step > width) {
             // 若剩余的step大于width,则会走过这一格
-            temp = width;
-            step -= width;
+            temp = width, step -= width;
         } else {
             // 反之则会停留在这一格
-            temp = step;
-            step = 0;
+            temp = step, step = 0;
         }
         if (ans == d_right) {
             x_loc += temp;
@@ -39,7 +37,6 @@ int road::transToLoc(int step, int &x, int &y) const {
             y_loc -= temp;
         }
     }
-    x = x_loc;
-    y = y_loc;
+    x = x_loc, y = y_loc;
     return ans;
 }

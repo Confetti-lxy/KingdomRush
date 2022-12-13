@@ -16,14 +16,9 @@ private:
 public:
     ticket(QString routineImg, QString activationImg = "");
 
-    void zoomUp();// 向上抖动
-
-    void zoomDown();// 向下抖动
-
+    void zoom();// 抖动
     void press(QMouseEvent *event);// 鼠标点击动作
-
     void release(QMouseEvent *event);// 鼠标释放动作
-
     signals:
 };
 
