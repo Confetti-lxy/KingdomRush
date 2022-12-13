@@ -39,8 +39,7 @@ bool defender::statusChecking() {
         for (auto blockedEnemy: blockedEnemys) {
             blockedEnemy->set_blocked(false);
         }
-        this->blockedEnemys.clear();
-        this->hide();
+        this->blockedEnemys.clear(), this->hide();
         return false;
     }
 }
@@ -51,8 +50,7 @@ void defender::beAttacked(int atk) {
 
 void defender::mouseReleaseEvent(QMouseEvent *click) {
     if (location_check(click) && coins >= cost) {
-        show();
-        coins -= cost;
+        show(), coins -= cost;
         set_IsDep(true);
     } else {
         close();
@@ -74,7 +72,6 @@ void defender::defenderDeploy(QMouseEvent *click) {
 double defender::distance_cal(int enemy_x, int enemy_y) {
     int x = enemy_x - defender_x_loc;
     int y = enemy_y - defender_y_loc;
-
     return sqrt(x * x + y * y);
 }
 
@@ -95,14 +92,12 @@ bool defender::add_enemy(enemy *e) {
     if (e->statusChecking() && blockedEnemys.size() < block_num) {
         if (e->Type == Remoteenemy || e->Type == Barbarian) {
             if(e->openFlash && e->flashCooling) {
-                e->flashCooling = false;
-                e->flashDen = this;
+                e->flashCooling = false, e->flashDen = this;
             }
             else  {
                 if (!e->get_blocked() && judge_attack(e->x(), e->y()) && e->flashDen != this) {
                     blockedEnemys.append(e);
-                    e->set_blocked(true);
-                    e->flashDen = nullptr;
+                    e->set_blocked(true), e->flashDen = nullptr;
                     e->flashCooling = true;
                     return true;
                 }

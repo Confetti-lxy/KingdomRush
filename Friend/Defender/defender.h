@@ -35,7 +35,6 @@ public:
     Map *my_map;
     DefenderType Type; // 防御者种类
     deploy *my_deploy;// 鼠标的部署动作
-
     int defender_x_loc, defender_y_loc;//defender的坐标
     int relative_x, relative_y;//格子坐标
 
@@ -48,17 +47,14 @@ public:
     int massInjuredCount = 0;// 群攻攻击计数
     //-------------------------------------------
 
-
     // 构造函数
     defender();
 
     // 功能函数
-
     // 虚函数，在子类中细化
     virtual void attackAnimation(enemy *blockedEnemy) = 0; // 攻击动画
     void defenderDeploy(QMouseEvent *click);// 鼠标点击部署位置，下方单位
     virtual void attack() = 0;// 攻击敌人
-
 
     // 实函数，在所有子类中共用
     bool statusChecking(); // 生命值检查
@@ -67,15 +63,12 @@ public:
     double distance_cal(int enemy_x, int enemy_y);// 计算与敌人的距离
     virtual bool add_enemy(enemy *e);// 添加阻挡的敌人
 
-
     //鼠标动作，相关的部署函数
-
     // 虚函数，在子类中细化
     virtual bool location_check(QMouseEvent *click) = 0;// 位置检查
 
     // 实函数，在所有子类中共用
     void mouseReleaseEvent(QMouseEvent *click);// 单位部署
-
 
     // 以下是一系列set和get函数
     void set_attack(bool isAttack) { this->isAttack = isAttack; }
@@ -125,7 +118,6 @@ public:
     void set_cost(int cost) { this->cost = cost; }
 
     blood* get_blood() {return life;}
-
 };
 
 #endif // DEFENDER_H

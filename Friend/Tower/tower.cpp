@@ -1,21 +1,17 @@
 #include "tower.h"
 
 tower::tower() {
-    my_range = new range;
-    my_range->hide();
-    isRange = false;
-    isAttack = false;
+    my_range = new range, my_range->hide();
+    isRange = false, isAttack = false;
 }
 
 
 void tower::attack() {
     target_enemy->beAttatked(get_atk());
     if(openBleeding) {
-        target_enemy->bleeded = true;
-        atkCount++;
+        target_enemy->bleeded = true, atkCount++;
         if(atkCount == 100) {
-            atkCount = 0;
-            openBleeding = false;
+            atkCount = 0, openBleeding = false;
             deleteState(states, Bleeding);
         }
     }
@@ -30,13 +26,7 @@ bool tower::statusChecking() {
     if (existLife > 0) {
         return true;
     } else {
-        for(auto s:states) {
-            if(s->Type == Bleeding) {
-
-            }
-        }
-        this->hide();
-        this->my_build->setState(true);
+        this->hide(), this->my_build->setState(true);
         return false;
     }
 }
@@ -48,12 +38,10 @@ bool tower::show_rng(int x, int y) {
     if (x >= this->x() && x <= this->x() + 70 && y >= this->y() && y <= this->y() + 70) {
         if (!isRange) {
             if (statusChecking()) {
-                set_range(true);
-                my_range->show();
+                set_range(true), my_range->show();
             }
         } else {
-            set_range(false);
-            my_range->hide();
+            set_range(false), my_range->hide();
         }
     }
     return false;
@@ -70,38 +58,9 @@ bool tower::judge_enemy(enemy *e) {
     double dis = rng * width;
     if (e->statusChecking()) {
         if (dis >= distance_cal(e->x(), e->y())) {
-            target_enemy = e;
-            attack();
+            target_enemy = e, attack();
             return true;
         }
     }
     return false;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

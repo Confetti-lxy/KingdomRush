@@ -11,7 +11,6 @@ CONFIG += c++17
 SOURCES += \
     Common/Blood/blood.cpp \
     Common/Bullet/bullet.cpp \
-    Common/Button/architecture.cpp \
     Common/Button/build.cpp \
     Common/Button/deploy.cpp \
     Common/Button/ticket.cpp \
@@ -44,7 +43,6 @@ SOURCES += \
 HEADERS += \
     Common/Blood/blood.h \
     Common/Bullet/bullet.h \
-    Common/Button/architecture.h \
     Common/Button/build.h \
     Common/Button/deploy.h \
     Common/Button/ticket.h \

@@ -1,13 +1,12 @@
 #include "deploy.h"
 
 deploy::deploy(QString defenderPath) {
-    defenderImg = defenderPath;
-    QPixmap pix;
-    if (!pix.load(defenderImg)) {
+    this->defenderPath = defenderPath;
+    if (!deployImg.load(defenderPath)) {
         qDebug() << "picture load fail";
         return;
     }
-    SetIcon(pix);
+    SetIcon(deployImg);
 }
 
 void deploy::mousePressEvent(QMouseEvent *event) {
@@ -22,7 +21,8 @@ void deploy::mouseMoveEvent(QMouseEvent *event) {
 }
 
 void deploy::mouseReleaseEvent(QMouseEvent *event) {
-    if (isMoveaiable)
+    if (isMoveaiable) {
         emit release_deploy(event);
+    }
     isMoveaiable = false;
 }

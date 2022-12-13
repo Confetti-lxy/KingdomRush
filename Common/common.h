@@ -20,6 +20,10 @@ using namespace std;
 #include <QIcon>
 #include <QCoreApplication>
 
+
+//-------------------------------------------------------------------------------------
+// 常用的宏，用于减少代码量
+
 // 图片设置1
 #define SetIcon(pix)\
     setFixedSize(pix.width(),pix.height());\
@@ -109,7 +113,10 @@ using namespace std;
     img ->setBaseSize(QSize(pix.width(), pix.height()));\
     img ->raise();
 
+//-------------------------------------------------------------------------------------
 
+//-------------------------------------------------------------------------------------
+// 各类集合体，用于描述各类参数
 enum direction_type {
     d_left,
     d_right,
@@ -166,8 +173,11 @@ enum DefenderBuff {
     Glacial,
     MassInjured,
 };// 友方近战单位的buff增益
+//-------------------------------------------------------------------------------------
 
 
+//-------------------------------------------------------------------------------------
+// 各类结构体
 struct groundEnemyImage {
     QPixmap enemyleft1_Img;
     QPixmap enemyleft2_Img;
@@ -232,17 +242,6 @@ struct levelButton {
     QPushButton *back;// 返回到选地图的界面
 };// level里面的按钮组件
 
+//-------------------------------------------------------------------------------------
+
 #endif // COMMON_H
-
-
-
-
-
-
-
-
-
-
-
-
-

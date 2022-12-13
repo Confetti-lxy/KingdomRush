@@ -46,11 +46,9 @@ dragon::dragon() {
     if (!dragon::load()) {
         return;
     }
-
     // 图片设置
     SetBase(dragonImg.dragonImg);
-
-    // soldier单位的数值设计
+    // dragon单位的数值设计
     Type = Dragon;
     set_atk(600), set_rng(1);
     set_cost(100);
@@ -79,44 +77,36 @@ void dragon::attackAnimation(enemy *blockedEnemy) {
         if (x() < blockedEnemy->x()) {
             if (!get_atkImg()) {
                 setPixmap(dragonImg.dragonattackright1_Img);
-                raise();
-                set_atkImg(true);
+                raise(), set_atkImg(true);
             } else {
                 setPixmap(dragonImg.dragonattackright2_Img);
-                raise();
-                set_atkImg(false);
+                raise(), set_atkImg(false);
             }
         } else {
             if (!get_atkImg()) {
                 setPixmap(dragonImg.dragonattackleft1_Img);
-                raise();
-                set_atkImg(true);
+                raise(), set_atkImg(true);
             } else {
                 setPixmap(dragonImg.dragonattackleft2_Img);
-                raise();
-                set_atkImg(false);
+                raise(), set_atkImg(false);
             }
         }
     } else {
         if (x() < blockedEnemy->x()) {
             if (!get_atkImg()) {
                 setPixmap(dragonImg.dragonattackright3_Img);
-                raise();
-                set_atkImg(true);
+                raise(), set_atkImg(true);
             } else {
                 setPixmap(dragonImg.dragonattackright4_Img);
-                raise();
-                set_atkImg(false);
+                raise(), set_atkImg(false);
             }
         } else {
             if (!get_atkImg()) {
                 setPixmap(dragonImg.dragonattackleft3_Img);
-                raise();
-                set_atkImg(true);
+                raise(), set_atkImg(true);
             } else {
                 setPixmap(dragonImg.dragonattackleft4_Img);
-                raise();
-                set_atkImg(false);
+                raise(), set_atkImg(false);
             }
         }
     }
@@ -139,11 +129,9 @@ void dragon::attack() {
             if(this->openMassInjured) {
                 e[0]->beAttatked(get_atk());
                 if(this->openGlacial) {
-                    e[0]->beFrozen = true;
-                    glacialCount++;
+                    e[0]->beFrozen = true, glacialCount++;
                     if(glacialCount == 20) {
-                        openGlacial = 0;
-                        openGlacial = false;
+                        openGlacial = 0, openGlacial = false;
                         deleteState(states, Glacial)
                     }
                 }
@@ -158,11 +146,9 @@ void dragon::attack() {
                 for(auto enemy:e) {
                     enemy->beAttatked(get_atk());
                     if(this->openGlacial) {
-                        enemy->beFrozen = true;
-                        glacialCount++;
+                        enemy->beFrozen = true, glacialCount++;
                         if(glacialCount == 20) {
-                            openGlacial = 0;
-                            openGlacial = false;
+                            openGlacial = 0, openGlacial = false;
                             deleteState(states, Glacial)
                         }
                     }
@@ -190,8 +176,7 @@ bool dragon::add_enemy(enemy *e) {
     QVector < enemy * > d = get_blockEnemy();
     if (e->statusChecking() && d.size() < get_block()) {
         if (!e->get_blocked() && judge_attack(e->x(), e->y())) {
-            d.append(e);
-            e->set_blocked(true);
+            d.append(e), e->set_blocked(true);
             set_blockedEnemy(d);
             return true;
         }

@@ -15,7 +15,6 @@ public:
 
 
     //功能函数
-
     // 虚函数，在子类中细化
     virtual void attackAnimation() = 0; // 攻击动画
     virtual void moveAnimation() = 0;// 移动动画
@@ -24,8 +23,6 @@ public:
 
     // 实函数，在所有子类中共用
     void enemyMove(int road_loc, int step);// 地面敌人的移动
-
-
 };
 
 #endif // GROUNDENEMY_H

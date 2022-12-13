@@ -48,9 +48,8 @@ public:
     void mousePressEvent(QMouseEvent *event);
 
     signals:
-            void levelBack();
-
-    void levelAgain();
+    void levelBack();// 返回主界面
+    void levelAgain();// 重新开始
 };
 
 

@@ -42,7 +42,6 @@ barbarian::barbarian() {
         return;
     }
     SetBase(enemyImage.enemyleft1_Img);
-
     // Barbarian的属性设置
     Type = Barbarian;
     set_atk(40), set_rng(1);
@@ -105,8 +104,7 @@ bool barbarian::judge_defender(defender *d) {
     if (statusChecking()) {
         if (d->statusChecking()) {
             if (distance_cal(d->defender_x_loc, d->defender_y_loc) <= width * get_rng()) {
-                set_defender(d);
-                attack();
+                set_defender(d), attack();
                 return true;
             }
         }
@@ -121,37 +119,3 @@ void barbarian::attack() {
         this->attackAnimation();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

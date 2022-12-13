@@ -14,7 +14,6 @@ public:
     flyEnemy();// 构造函数
 
     //功能函数
-
     // 虚函数，在子类中细化
     virtual void attackAnimation() = 0; // 攻击动画
     virtual void moveAnimation() = 0;// 移动动画

@@ -6,7 +6,7 @@
 
 class arrowTower : public tower {
 public:
-    arrowTower();
+    arrowTower();// 构造函数
 };
 
 #endif // ARROWTOWER_H

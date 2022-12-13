@@ -14,11 +14,9 @@ guard::guard() {
     if (!guard::load()) {
         return;
     }
-
     // 图片设置
     SetBase(guardImg);
-
-    // soldier单位的数值设计
+    // guard单位的数值设计
     Type = Guard;
     set_atk(0), set_rng(1);
     set_cost(80);
@@ -54,38 +52,3 @@ bool guard::location_check(QMouseEvent *click) {
     }
     return false;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -5,7 +5,7 @@
 
 class mercenaryTower : public tower {
 public:
-    mercenaryTower();
+    mercenaryTower();// 构造函数
 };
 
 #endif // MERCENARYTOWER_H

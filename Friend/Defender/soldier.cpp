@@ -30,11 +30,8 @@ soldier::soldier() {
     if (!soldier::load()) {
         return;
     }
-
     // 图片设置
     SetBase(defenderImg.soldierImg);
-
-
     // soldier单位的数值设计
     Type = Soldier;
     set_atk(400), set_rng(1);
@@ -47,22 +44,18 @@ void soldier::attackAnimation(enemy *blockedEnemy) {
     if (x() < blockedEnemy->x()) {
         if (!get_atkImg()) {
             setPixmap(defenderImg.soldierattackright1_Img);
-            raise();
-            set_atkImg(true);
+            raise(), set_atkImg(true);
         } else {
             setPixmap(defenderImg.soldierattackright2_Img);
-            raise();
-            set_atkImg(false);
+            raise(), set_atkImg(false);
         }
     } else {
         if (!get_atkImg()) {
             setPixmap(defenderImg.soldierattackleft1_Img);
-            raise();
-            set_atkImg(true);
+            raise(), set_atkImg(true);
         } else {
             setPixmap(defenderImg.soldierattackleft2_Img);
-            raise();
-            set_atkImg(false);
+            raise(), set_atkImg(false);
         }
     }
 }
@@ -84,18 +77,15 @@ void soldier::attack() {
             if(this->openMassInjured) {
                 e[0]->beAttatked(get_atk());
                 if(this->openGlacial) {
-                    e[0]->beFrozen = true;
-                    glacialCount++;
+                    e[0]->beFrozen = true, glacialCount++;
                     if(glacialCount == 20) {
-                        openGlacial = 0;
-                        openGlacial = false;
+                        openGlacial = 0, openGlacial = false;
                         deleteState(states, Glacial)
                     }
                 }
                 massInjuredCount++;
                 if(massInjuredCount == 10) {
-                    massInjuredCount = 0;
-                    openMassInjured = false;
+                    massInjuredCount = 0, openMassInjured = false;
                     deleteState(states, MassInjured)
                 }
             }
@@ -103,11 +93,9 @@ void soldier::attack() {
                 for(auto enemy:e) {
                     enemy->beAttatked(get_atk());
                     if(this->openGlacial) {
-                        enemy->beFrozen = true;
-                        glacialCount++;
+                        enemy->beFrozen = true, glacialCount++;
                         if(glacialCount == 20) {
-                            openGlacial = 0;
-                            openGlacial = false;
+                            openGlacial = 0, openGlacial = false;
                             deleteState(states, Glacial)
                         }
                     }
@@ -145,44 +133,3 @@ bool soldier::location_check(QMouseEvent *click) {
     }
     return false;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

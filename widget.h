@@ -24,14 +24,12 @@ public:
 
     ~Widget();// 析构函数
 
-
-
     // 一系列的get和set函数
     void set_state(bool state) { this->state = state; }
 
     bool get_state() { return this->state; }
 
-    signals:
-            void openLevel();
+signals:
+    void openLevel();
 };
 #endif // WIDGET_H

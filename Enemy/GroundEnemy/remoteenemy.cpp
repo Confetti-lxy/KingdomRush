@@ -48,8 +48,7 @@ remoteenemy::remoteenemy() {
         return;
     }
     SetBase(enemyImage.enemyleft1_Img);
-
-    // Barbarian的属性设置
+    // Remoteenemy的属性设置
     Type = Remoteenemy;
     set_atk(100), set_rng(3);
     set_allLife(4000), set_existLife(4000);
@@ -59,29 +58,30 @@ remoteenemy::remoteenemy() {
 }
 
 void remoteenemy::moveAnimation() {
-    if (get_alive()) {
-        if (get_direction() == e_left) {
-            if (get_img1()) {
-                setPixmap(enemyImage.enemyleft2_Img);
-                resize(QSize(enemyImage.enemyleft2_Img.width(), enemyImage.enemyleft2_Img.height()));
-                set_img1(false);
-            } else {
-                setPixmap(enemyImage.enemyleft1_Img);
-                resize(QSize(enemyImage.enemyleft1_Img.width(), enemyImage.enemyleft1_Img.height()));
-                set_img1(true);
-            }
-            return;
+    if (!get_alive()) {
+        return;
+    }
+    if (get_direction() == e_left) {
+        if (get_img1()) {
+            setPixmap(enemyImage.enemyleft2_Img);
+            resize(QSize(enemyImage.enemyleft2_Img.width(), enemyImage.enemyleft2_Img.height()));
+            set_img1(false);
+        } else {
+            setPixmap(enemyImage.enemyleft1_Img);
+            resize(QSize(enemyImage.enemyleft1_Img.width(), enemyImage.enemyleft1_Img.height()));
+            set_img1(true);
         }
-        if (get_direction() == e_right) {
-            if (get_img1()) {
-                setPixmap(enemyImage.enemyright2_Img);
-                resize(QSize(enemyImage.enemyright2_Img.width(), enemyImage.enemyright2_Img.height()));
-                set_img1(false);
-            } else {
-                setPixmap(enemyImage.enemyright1_Img);
-                resize(QSize(enemyImage.enemyright1_Img.width(), enemyImage.enemyright1_Img.height()));
-                set_img1(true);
-            }
+        return;
+    }
+    if (get_direction() == e_right) {
+        if (get_img1()) {
+            setPixmap(enemyImage.enemyright2_Img);
+            resize(QSize(enemyImage.enemyright2_Img.width(), enemyImage.enemyright2_Img.height()));
+            set_img1(false);
+        } else {
+            setPixmap(enemyImage.enemyright1_Img);
+            resize(QSize(enemyImage.enemyright1_Img.width(), enemyImage.enemyright1_Img.height()));
+            set_img1(true);
         }
     }
 }
@@ -91,8 +91,7 @@ bool remoteenemy::judge_defender(defender *d) {
     if (statusChecking()) {
         if (d->statusChecking()) {
             if (distance_cal(d->defender_x_loc, d->defender_y_loc) <= width * get_rng()) {
-                set_defender(d);
-                attack();
+                set_defender(d), attack();
                 return true;
             }
         }
@@ -135,8 +134,7 @@ void remoteenemy::attackAnimation() {
             bullets.append(b);
             b->move(x() + 60, y() + 25);
             b->setParent(this->parentWidget());
-            b->show();
-            b->ballistic(get_defender());
+            b->show(), b->ballistic(get_defender());
             bulletStatu++;
         } else {
             bulletStatu = (bulletStatu + 1) % 10;

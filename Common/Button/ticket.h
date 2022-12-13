@@ -6,12 +6,12 @@
 // 这个类用于描述抖动的窗口，这个项目中只用于开始界面的start button
 
 class ticket : public QPushButton {
-
-private:
     Q_OBJECT
-            QString
-    routineImg,
-    activationImg;
+private:
+
+    QString routineImg, activationImg;
+    QPixmap normalImg;// 初始图片
+    QPixmap specialImg;// 特殊状态的图片
 
 public:
     ticket(QString routineImg, QString activationImg = "");

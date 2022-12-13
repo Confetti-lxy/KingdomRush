@@ -6,11 +6,10 @@
 class range : public QLabel {
 private:
     int r = 0, x_r = 0, y_r = 0;// 班级，坐标参数
-
 public:
     range();// 构造函数
 
-    void paintEvent(QPaintEvent *);
+    void paintEvent(QPaintEvent *);// 塔攻击范围的绘制
 
     // 一系列的get和set函数
 

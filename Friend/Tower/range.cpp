@@ -4,7 +4,6 @@ range::range() {
     setFixedSize(1000, 1000);
 }
 
-
 void range::paintEvent(QPaintEvent *) {
     QPainter painter(this);
     QColor color("#AAAAAA");

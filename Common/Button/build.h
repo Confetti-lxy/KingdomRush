@@ -1,7 +1,19 @@
 #ifndef BUILD_H
 #define BUILD_H
 
-#include "architecture.h"
+#include "./Common/common.h"
+
+class architecture : public QPushButton {
+public:
+private:
+    Q_OBJECT
+    QString architectureLoc;// 加载图片地址
+    QPixmap architectureImg;// 建筑物图片素材
+public:
+    architecture(const QString &architecturePath);// 构造函数
+
+    signals:
+};
 
 
 class build : public QPushButton {

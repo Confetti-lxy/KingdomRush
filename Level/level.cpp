@@ -139,18 +139,15 @@ void level::putDown() {
         defenderInit(soldierModel, 950, 0, 930, 0);
         if(this->s1) {
             defenderState* d = new defenderState(soldierModel, Berserk);
-            soldierModel->states.append(d);
-            this->s1 = false;
+            soldierModel->states.append(d), this->s1 = false;
         }
         else if(this->s2) {
             defenderState* d = new defenderState(soldierModel, Glacial);
-            soldierModel->states.append(d);
-            this->s2 = false;
+            soldierModel->states.append(d), this->s2 = false;
         }
         else {
             defenderState* d = new defenderState(soldierModel, MassInjured);
-            soldierModel->states.append(d);
-            this->s3 = false;
+            soldierModel->states.append(d), this->s3 = false;
         }
         soldierModel->statusChecking();
     }
@@ -161,18 +158,15 @@ void level::putDown() {
         defenderInit(guardModel, 950, 120, 930, 120);
         if(this->s1) {
             defenderState* d = new defenderState(soldierModel, Berserk);
-            soldierModel->states.append(d);
-            this->s1 = false;
+            soldierModel->states.append(d), this->s1 = false;
         }
         else if(this->s2) {
             defenderState* d = new defenderState(soldierModel, Glacial);
-            soldierModel->states.append(d);
-            this->s2 = false;
+            soldierModel->states.append(d), this->s2 = false;
         }
         else {
             defenderState* d = new defenderState(soldierModel, MassInjured);
-            soldierModel->states.append(d);
-            this->s3 = false;
+            soldierModel->states.append(d), this->s3 = false;
         }
         soldierModel->statusChecking();
     }

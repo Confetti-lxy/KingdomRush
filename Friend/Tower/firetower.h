@@ -5,7 +5,7 @@
 
 class fireTower : public tower {
 public:
-    fireTower();
+    fireTower();// 构造函数
 };
 
 #endif // FIRETOWER_H

@@ -20,7 +20,6 @@ protected:
     int attackInterval = 500;// 攻击间隔（攻速）
     bool isAttack;  // 是否在战斗状态
 
-
     bool isDeploy = false; // 是否成功部署
 
     enemy *target_enemy;// 锁定的敌人
@@ -39,21 +38,14 @@ public:
     int atkCount;// 攻击计数
     //-------------------------------------------
 
-
     tower();// 构造函数
 
     // 功能函数
-
     void attack();// 攻击函数
-
     void beAttacked(int atk);// 被攻击
-
     bool statusChecking(); // 生命值检查
-
     bool show_rng(int x, int y);// 显示攻击范围
-
     double distance_cal(int enemy_x, int enemy_y);// 计算与敌人的距离
-
     bool judge_enemy(enemy *e);// 选取攻击的单位
 
     // 一系列的get和set函数

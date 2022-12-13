@@ -23,13 +23,11 @@ void enemy::beAttatked(int hurt) {
 bool enemy::statusChecking() {
     life->raise();
     if (!isAlive) {
-        life->hide();
-        this->hide();
+        life->hide(), this->hide();
         return false;
     } else if (isAlive && existLife <= 0) {
         isAlive = false;
-        lower();
-        life->hide();
+        lower(), life->hide();
         return false;
     } else {
         for(auto s : states) {
@@ -63,15 +61,13 @@ bool enemy::enterEnd() {
         int y_len = my_map->allRoads[index].get_loc(length - 1, 1) * width;
         if (Type == Gargoyle || Type == Raptor) {
             if (x() <= x_len + 30 && x() >= x_len - 30 && y() >= y_len - 30 && y() <= y_len + 30) {
-                set_arrive(true);
-                set_alive(false);
+                set_arrive(true), set_alive(false);
                 qDebug() << Type << get_alive();
                 return true;
             }
         } else {
             if (x() <= x_len + 10 && x() >= x_len - 10 && y() >= y_len - 10 && y() <= y_len + 10) {
-                set_arrive(true);
-                set_alive(false);
+                set_arrive(true), set_alive(false);
                 qDebug() << Type << get_alive();
                 return true;
             }

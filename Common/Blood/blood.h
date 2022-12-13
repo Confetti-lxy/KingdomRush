@@ -6,13 +6,14 @@
 
 class blood : public QLabel {
 private:
-    int len = 70;// 总长度
-    int t = 0;//
+    int len = 70,t = 0;// 总长度
 
 public:
-    QColor color;
+    QColor color;// 用于buff进行血条颜色的调整
+
     blood();// 构造函数
-    void paintEvent(QPaintEvent *);
+
+    void paintEvent(QPaintEvent *);// 血条上色函数
 
     // 一系列的get和set函数
     void set_len(int len) { this->len = len; }
