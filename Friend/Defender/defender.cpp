@@ -58,14 +58,16 @@ void defender::mouseReleaseEvent(QMouseEvent *click) {
 }
 
 void defender::defenderDeploy(QMouseEvent *click) {
-    if (Type == Soldier)
+    if (Type == Soldier) {
         this->move(click->pos().x() + 895, click->pos().y() - 20);
-    if (Type == Guard)
+    }
+    if (Type == Guard) {
         this->move(click->pos().x() + 895, click->pos().y() + 130);
-    if (Type == Dragon)
-        this->move(click->pos().x() + 810, click->pos().y() + 280);
-    this->show();
-    this->raise();
+    }
+    if (Type == Dragon) {
+        this->move(click->pos().x() + 830, click->pos().y() + 280);
+    }
+    this->show(), this->raise();
     this->setAttribute(Qt::WA_TransparentForMouseEvents);
 }
 

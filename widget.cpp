@@ -5,7 +5,6 @@
 
 Widget::Widget(QWidget *parent)
         : QWidget(parent), ui(new Ui::Widget) {
-
     ui->setupUi(this);
     this->setWindowTitle("Kingdom Rush！");// 设置标题
     this->setWindowIcon(QPixmap(":/image/Icon.png"));// 设置图标
@@ -13,8 +12,13 @@ Widget::Widget(QWidget *parent)
     this->setFixedSize(my_map.get_len(), my_map.get_height());
     ticket *start = new ticket(":/image/start1.png", ":/image/start2.png");// 游戏开始的那个栏目
     start->move(370, 315), start->setParent(this);
-    // 加载选关界面
+    // 播放背景音乐
+    QSoundEffect * startSound = new QSoundEffect(this);//创建对象
+    startSound->setSource(QUrl::fromLocalFile(":/music/backMusic.wav"));//添加资源
+    startSound->setLoopCount(QSoundEffect::Infinite);//设置循环次数int；  QSoundEffect::Infinite 枚举值 无限循环
+    startSound->play();//软件启动自动播放
     status = new QLabel;
+    // 加载选关界面
     QPixmap level;
     if (!level.load(":/image/levelchoose.png")) {
         qDebug() << "picture load fail";
@@ -39,7 +43,6 @@ Widget::~Widget() {
 void Widget::paintEvent(QPaintEvent *) {
     // 绘制底层模块和游戏封面
     QPainter painter(this);
-    painter.drawPixmap(0, 0, QPixmap(":/image/map1.png"));
     painter.drawPixmap(0, 0, QPixmap(":/image/menu.jpg"));
 }
 
@@ -57,42 +60,3 @@ void Widget::mousePressEvent(QMouseEvent *click) {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -294,10 +294,9 @@ void level::makeWar() {
             labels.victoryInterface->raise();
             QTimer::singleShot(1000, [=]() {
                 buttons.back->move(560, labels.victoryInterface->y() + 448);
-                buttons.back->show();
+                buttons.back->show(), buttons.back->raise();
                 buttons.reopen->move(440, labels.victoryInterface->y() + 448);
-                buttons.reopen->show(), buttons.back->raise();
-                buttons.reopen->raise();
+                buttons.reopen->show(), buttons.reopen->raise();
             });
         } else {
             // 失败结算页面
@@ -305,10 +304,9 @@ void level::makeWar() {
             FaceBounce(labels.failureInterface)
             QTimer::singleShot(1000, [=]() {
                 buttons.back->move(550, labels.failureInterface->y() + 407);
-                buttons.back->show();
+                buttons.back->show(), buttons.back->raise();
                 buttons.reopen->move(430, labels.failureInterface->y() + 407);
-                buttons.reopen->show(), buttons.back->raise();
-                buttons.reopen->raise();
+                buttons.reopen->show(), buttons.reopen->raise();
             });
         }
     }

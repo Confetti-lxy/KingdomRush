@@ -88,4 +88,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     image/image.qrc \
-    mapfile/file.qrc
+    mapfile/file.qrc \
+    music/music.qrc
+
+QT += multimedia

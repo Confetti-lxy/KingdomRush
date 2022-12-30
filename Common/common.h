@@ -19,6 +19,7 @@ using namespace std;
 #include <QImage>
 #include <QIcon>
 #include <QCoreApplication>
+#include <QSoundEffect>
 
 
 //-------------------------------------------------------------------------------------
